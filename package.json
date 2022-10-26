@@ -6,7 +6,8 @@
         "start": "expo start",
         "android": "expo start --android",
         "ios": "expo start --ios",
-        "web": "expo start --web"
+        "web": "expo start --web",
+        "prepare": "husky install"
     },
     "dependencies": {
         "@expo/webpack-config": "^0.17.0",
@@ -24,7 +25,13 @@
         "@babel/core": "^7.12.9",
         "@types/react": "~18.0.14",
         "@types/react-native": "~0.69.1",
+        "husky": "^8.0.1",
+        "lint-staged": "^13.0.3",
+        "prettier": "2.7.1",
         "typescript": "~4.3.5"
+    },
+    "lint-staged": {
+        "**/*": "prettier --write --ignore-unknown"
     },
     "private": true
 }
