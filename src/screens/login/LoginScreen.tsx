@@ -8,8 +8,8 @@ import {
     TouchableOpacity,
     Button,
 } from 'react-native';
-import { AuthContext } from '../../context/AuthContext';
-import { color } from '../../styles/color';
+import { AuthContext } from 'src/context/AuthContext';
+import { color } from 'src/styles/color';
 
 const LoginScreen = () => {
     const { isLoading, login, logout, isLoggedIn } = useContext(AuthContext);

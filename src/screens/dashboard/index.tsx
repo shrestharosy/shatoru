@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { Text, SafeAreaView, StyleSheet, TouchableOpacity } from 'react-native';
-import { AuthContext } from '../../context/AuthContext';
-import { color } from '../../styles/color';
+import { AuthContext } from 'src/context/AuthContext';
+import { color } from 'src/styles/color';
 
 const Dashboard = () => {
     const { logout, isLoggedIn } = useContext(AuthContext);
