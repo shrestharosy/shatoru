@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { AuthProvider } from './src/context/AuthContext';
+import { AuthProvider } from './src/context/auth_context';
 import Main from './src/screens/main';
 
 export default function App() {
