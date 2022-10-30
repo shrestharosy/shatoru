@@ -1,68 +1,98 @@
-import { useContext } from 'react';
-import {
-    Text,
-    SafeAreaView,
-    StyleSheet,
-    View,
-    TextInput,
-    TouchableOpacity,
-    Button,
-} from 'react-native';
-import { AuthContext } from 'src/context/AuthContext';
-import { color } from 'src/styles/color';
+import { useContext, useState } from 'react';
+import { Text, View, StyleSheet, Button, TouchableOpacity } from 'react-native';
+import { yupResolver } from '@hookform/resolvers/yup';
 
-const LoginScreen = () => {
-    const { isLoading, login, logout, isLoggedIn } = useContext(AuthContext);
+import {
+    useForm,
+    FormProvider,
+    SubmitHandler,
+    SubmitErrorHandler,
+    Controller,
+} from 'react-hook-form';
+import { CustomInput } from 'src/components/form/CustomTextInput';
+import { color } from 'src/styles/color';
+import loginSchema from 'src/libs/validation-schema/login_schema';
+import { AuthContext } from 'src/context/auth_context';
+
+interface ILoginFormValues {
+    email: string;
+    password: string;
+}
+
+export default function App() {
+    const { login } = useContext(AuthContext);
+
+    const { ...methods } = useForm<ILoginFormValues>({
+        resolver: yupResolver(loginSchema),
+    });
+
+    const onSubmit: SubmitHandler<ILoginFormValues> = (data) => {
+        console.log({ data });
+        login();
+    };
+
+    const onError: SubmitErrorHandler<ILoginFormValues> = (errors) => {
+        return console.log({ errors });
+    };
 
     return (
-        <SafeAreaView style={styles.container}>
-            <View style={{ padding: 30 }}>
-                <TextInput
-                    placeholder={'Email Address'}
-                    keyboardType={'email-address'}
-                    style={styles.inputField}
+        <View style={styles.container}>
+            <>
+                <FormProvider {...methods}>
+                    <Controller
+                        name="email"
+                        control={methods.control}
+                        render={({ field }) => (
+                            <CustomInput
+                                {...field}
+                                label="Email"
+                                placeholder="shatoru@email.com"
+                                keyboardType="email-address"
+                            />
+                        )}
+                    />
+                    <Controller
+                        name="password"
+                        control={methods.control}
+                        render={({ field }) => (
+                            <CustomInput
+                                {...field}
+                                secureTextEntry
+                                label="Password"
+                                placeholder="******"
+                            />
+                        )}
+                    />
+                    <TouchableOpacity style={{ alignItems: 'flex-end' }}>
+                        <Text style={{ color: color.blue }}>
+                            Forgot password?
+                        </Text>
+                    </TouchableOpacity>
+                </FormProvider>
+            </>
+            <View style={styles.button}>
+                <Button
+                    title="Log In"
+                    color="#FFF"
+                    onPress={methods.handleSubmit(onSubmit, onError)}
                 />
-                <TextInput
-                    placeholder={'Password'}
-                    secureTextEntry={true}
-                    style={styles.inputField}
-                />
-                <TouchableOpacity style={{ alignItems: 'flex-end' }}>
-                    <Text style={{ color: color.blue }}>Forgot password?</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    style={styles.loginButton}
-                    onPress={() => login()}
-                >
-                    <Text style={styles.loginText}>Log In</Text>
-                </TouchableOpacity>
             </View>
-        </SafeAreaView>
+        </View>
     );
-};
-
-export default LoginScreen;
+}
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
+    button: {
+        marginTop: 15,
+        height: 50,
+        backgroundColor: color.blue,
+        borderRadius: 8,
         justifyContent: 'center',
     },
-    inputField: {
-        borderBottomColor: '#ccc',
-        borderBottomWidth: 1,
-        paddingBottom: 8,
-        marginBottom: 25,
-    },
-    loginButton: {
-        alignItems: 'center',
-        padding: 20,
-        borderRadius: 100,
-        backgroundColor: color.blue,
-        marginTop: 25,
-    },
-    loginText: {
-        color: '#FFF',
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        paddingLeft: 20,
+        paddingRight: 20,
     },
 });

@@ -1,6 +1,6 @@
 import { createContext, ReactElement, useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { STORAGE } from '../constants/storage';
+import { STORAGE } from 'src/libs/constants/storage';
 
 interface IAuthContextValues {
     isLoading: boolean | null;
