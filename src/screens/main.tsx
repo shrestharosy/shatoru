@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { AuthContext } from '../context/AuthContext';
+import { AuthContext } from 'src/context/auth_context';
 import Dashboard from './dashboard';
 import LoginScreen from './login/LoginScreen';
 

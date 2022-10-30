@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { Text, SafeAreaView, StyleSheet, TouchableOpacity } from 'react-native';
-import { AuthContext } from 'src/context/AuthContext';
+import { AuthContext } from 'src/context/auth_context';
 import { color } from 'src/styles/color';
 
 const Dashboard = () => {
