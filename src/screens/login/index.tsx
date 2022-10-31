@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { Text, View, StyleSheet, Button, TouchableOpacity } from 'react-native';
 import { yupResolver } from '@hookform/resolvers/yup';
 
@@ -19,7 +19,7 @@ interface ILoginFormValues {
     password: string;
 }
 
-export default function App() {
+export default function Login() {
     const { login } = useContext(AuthContext);
 
     const { ...methods } = useForm<ILoginFormValues>({
