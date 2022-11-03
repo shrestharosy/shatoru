@@ -1,4 +1,5 @@
 import { useContext, useState } from 'react';
+import { useTailwind } from 'tailwind-rn/dist';
 import { Text, View, StyleSheet, Button, TouchableOpacity } from 'react-native';
 import { yupResolver } from '@hookform/resolvers/yup';
 
@@ -20,6 +21,7 @@ interface ILoginFormValues {
 }
 
 export default function App() {
+    const tailwind = useTailwind();
     const { login } = useContext(AuthContext);
 
     const { ...methods } = useForm<ILoginFormValues>({
@@ -37,6 +39,7 @@ export default function App() {
 
     return (
         <View style={styles.container}>
+            <Text style={tailwind('text-red-500')}>Hello</Text>
             <>
                 <FormProvider {...methods}>
                     <Controller
