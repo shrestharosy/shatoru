@@ -10,15 +10,8 @@ export default function Main() {
     const { isLoggedIn } = useContext(AuthContext);
 
     return (
-        <View style={styles.container}>
+        <View style={tailwind('py-12 px-4')}>
             {isLoggedIn ? <Dashboard /> : <LoginScreen />}
         </View>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-    },
-});
