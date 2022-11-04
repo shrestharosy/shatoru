@@ -15,7 +15,7 @@ import {
 } from 'react-hook-form';
 
 interface ICustomInputProps extends RNTextInputProps, UseControllerProps {
-    label: string;
+    label?: string;
     name: string;
     defaultValue?: string;
 }
