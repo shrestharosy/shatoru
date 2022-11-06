@@ -1,3 +1,4 @@
+import { yupResolver } from '@hookform/resolvers/yup';
 import React from 'react';
 import {
     Controller,
@@ -10,6 +11,7 @@ import { Pressable, Text, View } from 'react-native';
 import { CustomInput } from 'src/components/form/CustomTextInput';
 import withProtectedScreen from 'src/libs/hoc/auth_wrapper';
 import { IRouteProps } from 'src/libs/routes';
+import createDriverSchema from 'src/libs/validation-schema/create_driver_schema';
 
 import tw from 'src/styles/tailwind';
 
@@ -24,7 +26,9 @@ interface ICreateDriverFormValues {
 }
 
 const CreateDriver = ({ navigation }: IDriver) => {
-    const { ...methods } = useForm<ICreateDriverFormValues>({});
+    const { ...methods } = useForm<ICreateDriverFormValues>({
+        resolver: yupResolver(createDriverSchema),
+    });
 
     const onSubmit: SubmitHandler<ICreateDriverFormValues> = (data) => {
         console.log({ data });
@@ -87,7 +91,10 @@ const CreateDriver = ({ navigation }: IDriver) => {
                     />
                 </FormProvider>
             </>
-            <Pressable style={tw`bg-main p-2 rounded-md`}>
+            <Pressable
+                style={tw`bg-main p-2 rounded-md`}
+                onPress={methods.handleSubmit(onSubmit, onError)}
+            >
                 <Text style={tw`text-center text-lg tracking-wide`}>
                     CREATE
                 </Text>
