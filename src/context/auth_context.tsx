@@ -1,5 +1,5 @@
-import { createContext, ReactElement, useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { createContext, ReactElement, useEffect, useState } from 'react';
 import { STORAGE } from 'src/libs/constants/storage';
 
 interface IAuthContextValues {
@@ -16,7 +16,11 @@ export const AuthContext = createContext<IAuthContextValues>({
     isLoggedIn: false,
 });
 
-export const AuthProvider = ({ children }: { children: ReactElement }) => {
+interface IAuthProviderProps {
+    children: ReactElement;
+}
+
+export const AuthProvider = ({ children }: IAuthProviderProps) => {
     const [isLoading, setIsLoading] = useState(true);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [token, setToken] = useState<string | null>(null);
