@@ -13,13 +13,20 @@ import {
 import { CustomInput } from 'src/components/form/CustomTextInput';
 import { AuthContext } from 'src/context/auth_context';
 import loginSchema from 'src/libs/validation-schema/login_schema';
+import { IRouteProps } from 'src/libs/routes';
 
 interface ILoginFormValues {
     email: string;
     password: string;
 }
 
-export default function Login() {
+interface ILoginProps extends IRouteProps {}
+
+export default function Login(props: ILoginProps) {
+    const {
+        navigation: { navigate },
+    } = props;
+
     const { login } = useContext(AuthContext);
 
     const { ...methods } = useForm<ILoginFormValues>({
@@ -76,7 +83,10 @@ export default function Login() {
                                 />
                             )}
                         />
-                        <TouchableOpacity style={{ alignItems: 'flex-end' }}>
+                        <TouchableOpacity
+                            style={{ alignItems: 'flex-end' }}
+                            onPress={() => navigate('ForgotPassword')}
+                        >
                             <Text style={tw`mb-4 text-lightYellow`}>
                                 Forgot password?
                             </Text>
