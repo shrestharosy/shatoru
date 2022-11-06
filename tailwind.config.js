@@ -1,5 +1,6 @@
+// const { plugin } = require('twrnc');
+
 module.exports = {
-    content: ['./**/*.tsx'],
     theme: {
         extend: {
             colors: {
@@ -11,5 +12,4 @@ module.exports = {
         },
     },
     plugins: [],
-    corePlugins: require('tailwind-rn/unsupported-core-plugins'),
 };

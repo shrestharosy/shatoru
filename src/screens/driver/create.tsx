@@ -6,11 +6,13 @@ import {
     SubmitHandler,
     useForm,
 } from 'react-hook-form';
-import { Button, StyleSheet, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { CustomInput } from 'src/components/form/CustomTextInput';
 import withProtectedScreen from 'src/libs/hoc/auth_wrapper';
 import { IRouteProps } from 'src/libs/routes';
 import { color } from 'src/styles/color';
+
+import tw from 'src/styles/tailwind';
 
 interface IDriver extends IRouteProps {}
 
@@ -86,13 +88,11 @@ const CreateDriver = ({ navigation }: IDriver) => {
                     />
                 </FormProvider>
             </>
-            <View style={styles.button}>
-                <Button
-                    title="Create"
-                    color="#FFF"
-                    onPress={methods.handleSubmit(onSubmit, onError)}
-                />
-            </View>
+            <Pressable style={tw`bg-main p-2 rounded-md`}>
+                <Text style={tw`text-center text-lg tracking-wide`}>
+                    CREATE
+                </Text>
+            </Pressable>
         </View>
     );
 };
