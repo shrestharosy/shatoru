@@ -7,6 +7,7 @@ import Dashboard from './dashboard';
 import DriverScreen from './driver';
 import LoginScreen from './login';
 import CreateDriverScreen from './driver/create';
+import ForgotPassword from './forgotPassword';
 
 const Stack = createNativeStackNavigator<IRouteList>();
 
@@ -39,6 +40,10 @@ export default function Main() {
                         name={'Login'}
                         component={LoginScreen}
                         options={{ title: '' }}
+                    />
+                    <Stack.Screen
+                        name={'ForgotPassword'}
+                        component={ForgotPassword}
                     />
                 </Stack.Navigator>
             )}
