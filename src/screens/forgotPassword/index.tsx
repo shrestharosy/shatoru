@@ -7,7 +7,7 @@ import LogoTemplate from 'src/components/LogoTemplate';
 import { CustomInput } from 'src/components/form/CustomTextInput';
 import tw from 'src/styles/tailwind';
 
-export const ForgetPassword: FC = () => {
+export default function ForgotPassword() {
     const { ...methods } = useForm<{ email: string }>({
         resolver: yupResolver(
             YupObject().shape({
@@ -52,4 +52,4 @@ export const ForgetPassword: FC = () => {
             </View>
         </View>
     );
-};
+}
