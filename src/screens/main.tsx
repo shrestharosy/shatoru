@@ -4,6 +4,7 @@ import { useTailwind } from 'tailwind-rn/dist';
 import { AuthContext } from 'src/context/auth_context';
 import Dashboard from './dashboard';
 import LoginScreen from './login/LoginScreen';
+import { ForgetPassword } from './forgetPassword/ForgetPassword';
 
 export default function Main() {
     const tailwind = useTailwind();
@@ -11,7 +12,7 @@ export default function Main() {
 
     return (
         <View style={tailwind('py-12 px-4')}>
-            {isLoggedIn ? <Dashboard /> : <LoginScreen />}
+            {isLoggedIn ? <Dashboard /> : <ForgetPassword />}
         </View>
     );
 }
