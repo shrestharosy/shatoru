@@ -1,13 +1,13 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import { AuthContext } from 'src/context/auth_context';
 import IRouteList from 'src/libs/routes';
 import Dashboard from './dashboard';
 import DriverScreen from './driver';
 import LoginScreen from './login';
 import CreateDriverScreen from './driver/create';
-import { ForgetPassword as ForgotPassword } from './forgetPassword/ForgetPassword';
+import ForgotPassword from './forgotPassword';
 
 const Stack = createNativeStackNavigator<IRouteList>();
 
@@ -18,16 +18,29 @@ export default function Main() {
         <NavigationContainer>
             {isLoggedIn ? (
                 <Stack.Navigator>
-                    <Stack.Screen name={'Dashboard'} component={Dashboard} />
-                    <Stack.Screen name={'Driver'} component={DriverScreen} />
+                    <Stack.Screen
+                        name={'Dashboard'}
+                        component={Dashboard}
+                        options={{ title: '' }}
+                    />
+                    <Stack.Screen
+                        name={'Driver'}
+                        component={DriverScreen}
+                        options={{ title: '' }}
+                    />
                     <Stack.Screen
                         name={'CreateDriver'}
                         component={CreateDriverScreen}
+                        options={{ title: '' }}
                     />
                 </Stack.Navigator>
             ) : (
-                <Stack.Navigator>
-                    <Stack.Screen name={'Login'} component={LoginScreen} />
+                <Stack.Navigator screenOptions={{ headerShown: false }}>
+                    <Stack.Screen
+                        name={'Login'}
+                        component={LoginScreen}
+                        options={{ title: '' }}
+                    />
                     <Stack.Screen
                         name={'ForgotPassword'}
                         component={ForgotPassword}
