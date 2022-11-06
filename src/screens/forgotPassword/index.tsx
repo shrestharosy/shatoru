@@ -6,6 +6,7 @@ import { Image, Text, TouchableOpacity, View } from 'react-native';
 import LogoTemplate from 'src/components/LogoTemplate';
 import { CustomInput } from 'src/components/form/CustomTextInput';
 import tw from 'src/styles/tailwind';
+import { IMAGE } from 'src/images';
 
 export default function ForgotPassword() {
     const { ...methods } = useForm<{ email: string }>({
@@ -18,12 +19,9 @@ export default function ForgotPassword() {
 
     return (
         <View>
-            <LogoTemplate image="../login/loginpage_logo.png" />
+            <LogoTemplate image={IMAGE.SHUTTLE} />
             <View>
-                <Image
-                    style={tw`mx-auto`}
-                    source={require('../forgetPassword/question.png')}
-                />
+                <Image style={tw`mx-auto`} source={IMAGE.QUESTION} />
                 <Text style={tw`text-center text-4xl`}>Forgot Password</Text>
                 <Text style={tw`text-lg mt-4`}>
                     Please provide the email address associated with this

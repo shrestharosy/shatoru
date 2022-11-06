@@ -13,13 +13,21 @@ import {
 import { CustomInput } from 'src/components/form/CustomTextInput';
 import { AuthContext } from 'src/context/auth_context';
 import loginSchema from 'src/libs/validation-schema/login_schema';
+import { IRouteProps } from 'src/libs/routes';
+import { IMAGE } from 'src/images';
 
 interface ILoginFormValues {
     email: string;
     password: string;
 }
 
-export default function Login() {
+interface ILoginProps extends IRouteProps {}
+
+export default function Login(props: ILoginProps) {
+    const {
+        navigation: { navigate },
+    } = props;
+
     const { login } = useContext(AuthContext);
 
     const { ...methods } = useForm<ILoginFormValues>({
@@ -38,10 +46,7 @@ export default function Login() {
     return (
         <View style={tw`py-4 px-4`}>
             <View style={tw`py-16 px-8 bg-lightGray rounded-xl w-full`}>
-                <Image
-                    source={require('../login/loginpage_logo.png')}
-                    style={tw`h-32 w-full`}
-                />
+                <Image source={IMAGE.SHUTTLE} style={tw`h-32 w-full`} />
                 <Text
                     style={tw`text-brownRed text-base text-center mt-2 font-bold`}
                 >
@@ -76,7 +81,10 @@ export default function Login() {
                                 />
                             )}
                         />
-                        <TouchableOpacity style={{ alignItems: 'flex-end' }}>
+                        <TouchableOpacity
+                            style={{ alignItems: 'flex-end' }}
+                            onPress={() => navigate('ForgotPassword')}
+                        >
                             <Text style={tw`mb-4 text-lightYellow`}>
                                 Forgot password?
                             </Text>
