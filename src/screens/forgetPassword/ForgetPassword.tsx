@@ -22,7 +22,7 @@ export const ForgetPassword: FC = () => {
             <View>
                 <Image
                     style={tw`mx-auto`}
-                    source={require('../forgetPassword/question.png')}
+                    source={require('src/images/question.png')}
                 />
                 <Text style={tw`text-center text-4xl`}>Forgot Password</Text>
                 <Text style={tw`text-lg mt-4`}>
