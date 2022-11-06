@@ -50,7 +50,7 @@ export default function Login() {
             </View>
             <View style={tw`mt-4`}>
                 <Text style={tw`font-bold text-2xl`}>Welcome!</Text>
-                <Text>Sign in to your account</Text>
+                <Text>Log in to your account</Text>
                 <View style={tw`mt-12`}>
                     <FormProvider {...methods}>
                         <Controller
@@ -59,6 +59,7 @@ export default function Login() {
                             render={({ field }) => (
                                 <CustomInput
                                     {...field}
+                                    label="Email"
                                     placeholder="shatoru@email.com"
                                     keyboardType="email-address"
                                 />
