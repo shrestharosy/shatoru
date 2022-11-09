@@ -18,9 +18,9 @@ export default function ForgotPassword() {
     });
 
     return (
-        <View>
+        <View style={tw`py-12 px-2`}>
             <LogoTemplate image={IMAGE.SHUTTLE} />
-            <View>
+            <View style={tw`pt-2`}>
                 <Image style={tw`mx-auto`} source={IMAGE.QUESTION} />
                 <Text style={tw`text-center text-4xl`}>Forgot Password</Text>
                 <Text style={tw`text-lg mt-4`}>

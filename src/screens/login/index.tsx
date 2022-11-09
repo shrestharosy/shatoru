@@ -44,7 +44,7 @@ export default function Login(props: ILoginProps) {
     };
 
     return (
-        <View style={tw`py-4 px-4`}>
+        <View style={tw`py-12 px-2`}>
             <View style={tw`py-16 px-8 bg-lightGray rounded-xl w-full`}>
                 <Image source={IMAGE.SHUTTLE} style={tw`h-32 w-full`} />
                 <Text
