@@ -35,12 +35,12 @@ export default function Login(props: ILoginProps) {
     });
 
     const onSubmit: SubmitHandler<ILoginFormValues> = (data) => {
-        console.log({ data });
+        // console.log({ data });
         login();
     };
 
     const onError: SubmitErrorHandler<ILoginFormValues> = (errors) => {
-        return console.log({ errors });
+        // return console.log({ errors });
     };
 
     return (

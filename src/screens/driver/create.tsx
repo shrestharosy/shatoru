@@ -12,17 +12,17 @@ import { CustomInput } from 'src/components/form/CustomTextInput';
 import withProtectedScreen from 'src/libs/hoc/auth_wrapper';
 import { IRouteProps } from 'src/libs/routes';
 import createDriverSchema from 'src/libs/validation-schema/create_driver_schema';
+import { driverService } from 'src/services/driver';
 
 import tw from 'src/styles/tailwind';
 
 interface IDriver extends IRouteProps {}
 
 interface ICreateDriverFormValues {
-    fullName: string;
+    firstName: string;
+    lastName: string;
     email: string;
-    password: string;
-    confirmPassword: string;
-    phoneNumber: string;
+    username: string;
 }
 
 const CreateDriver = ({ navigation }: IDriver) => {
@@ -30,12 +30,17 @@ const CreateDriver = ({ navigation }: IDriver) => {
         resolver: yupResolver(createDriverSchema),
     });
 
-    const onSubmit: SubmitHandler<ICreateDriverFormValues> = (data) => {
-        console.log({ data });
+    const onSubmit: SubmitHandler<ICreateDriverFormValues> = async (data) => {
+        try {
+            await driverService.createDriver(data);
+            alert('Driver created successfully');
+        } catch (error: any) {
+            alert(error.message);
+        }
     };
 
     const onError: SubmitErrorHandler<ICreateDriverFormValues> = (errors) => {
-        return console.log({ errors });
+        // return console.log({ errors });
     };
 
     return (
@@ -43,13 +48,24 @@ const CreateDriver = ({ navigation }: IDriver) => {
             <>
                 <FormProvider {...methods}>
                     <Controller
-                        name="fullName"
+                        name="firstName"
                         control={methods.control}
                         render={({ field }) => (
                             <CustomInput
                                 {...field}
-                                label="Full Name"
-                                placeholder="John Doe"
+                                label="First Name"
+                                placeholder="John"
+                            />
+                        )}
+                    />
+                    <Controller
+                        name="lastName"
+                        control={methods.control}
+                        render={({ field }) => (
+                            <CustomInput
+                                {...field}
+                                label="Last Name"
+                                placeholder="Doe"
                             />
                         )}
                     />
@@ -66,26 +82,13 @@ const CreateDriver = ({ navigation }: IDriver) => {
                         )}
                     />
                     <Controller
-                        name="password"
+                        name="username"
                         control={methods.control}
                         render={({ field }) => (
                             <CustomInput
                                 {...field}
-                                secureTextEntry
-                                label="Password"
-                                placeholder="******"
-                            />
-                        )}
-                    />
-                    <Controller
-                        name="phoneNumber"
-                        control={methods.control}
-                        render={({ field }) => (
-                            <CustomInput
-                                {...field}
-                                label="Phone Number"
-                                placeholder={'(313)-111-0234'}
-                                keyboardType={'number-pad'}
+                                label="Username"
+                                placeholder="johndoe01"
                             />
                         )}
                     />

@@ -1,20 +1,20 @@
-import React from 'react';
-import {
-    Button,
-    Pressable,
-    SafeAreaView,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    View,
-} from 'react-native';
+import React, { useEffect } from 'react';
+import { Button, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import withProtectedScreen from 'src/libs/hoc/auth_wrapper';
 import { IRouteProps } from 'src/libs/routes';
-import { color } from 'src/styles/color';
 
 interface IDriver extends IRouteProps {}
 
 const Driver = ({ navigation }: IDriver) => {
+    useEffect(() => {
+        getDrivers();
+    }, []);
+
+    const getDrivers = async () => {
+        try {
+        } catch (error) {}
+    };
+
     return (
         <SafeAreaView>
             <View>
