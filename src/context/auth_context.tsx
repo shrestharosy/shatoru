@@ -1,20 +1,19 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createContext, ReactElement, useEffect, useState } from 'react';
 import { STORAGE } from 'src/libs/constants/storage';
+import { authService } from 'src/services/auth';
 
 interface IAuthContextValues {
     isLoading: boolean | null;
-    login: () => void;
+    login: (payload: ILogin) => void;
     logout: () => void;
     isLoggedIn: boolean;
 }
 
 export const AuthContext = createContext<IAuthContextValues>({
     isLoading: null,
-    login: () => null,
-    logout: () => null,
     isLoggedIn: false,
-});
+} as IAuthContextValues);
 
 interface IAuthProviderProps {
     children: ReactElement;
@@ -25,11 +24,20 @@ export const AuthProvider = ({ children }: IAuthProviderProps) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [token, setToken] = useState<string | null>(null);
 
-    const login = () => {
-        const token = 'something';
-        AsyncStorage.setItem(STORAGE.TOKEN, token);
-        setToken(token);
+    useEffect(() => {
         setAuthStatus();
+    }, [token]);
+
+    const login = async (payload: ILogin) => {
+        try {
+            const response = await authService.login(payload);
+            AsyncStorage.setItem(STORAGE.TOKEN, response.token);
+            setToken(token);
+            setAuthStatus();
+        } catch (error) {
+            console.log(error);
+            throw error;
+        }
     };
 
     const logout = () => {
@@ -54,10 +62,6 @@ export const AuthProvider = ({ children }: IAuthProviderProps) => {
             setIsLoading(false);
         }
     };
-
-    useEffect(() => {
-        setAuthStatus();
-    }, [token]);
 
     return (
         <AuthContext.Provider value={{ isLoading, isLoggedIn, login, logout }}>

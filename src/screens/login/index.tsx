@@ -34,9 +34,8 @@ export default function Login(props: ILoginProps) {
         resolver: yupResolver(loginSchema),
     });
 
-    const onSubmit: SubmitHandler<ILoginFormValues> = (data) => {
-        // console.log({ data });
-        login();
+    const onSubmit: SubmitHandler<ILoginFormValues> = async (data) => {
+        await login(data);
     };
 
     const onError: SubmitErrorHandler<ILoginFormValues> = (errors) => {
