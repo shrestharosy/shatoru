@@ -8,6 +8,8 @@ const APP_CONFIG: IAppEnvConfig = {
     BASE_URL: BASE_URL ?? '',
 };
 
+console.log(`BASE_URL : ${BASE_URL}`);
+
 interface IConfigValue {
     APP: IAppEnvConfig;
 }
