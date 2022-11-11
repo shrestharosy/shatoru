@@ -35,15 +35,16 @@ export default function Main() {
                     />
                 </Stack.Navigator>
             ) : (
-                <Stack.Navigator screenOptions={{ headerShown: false }}>
+                <Stack.Navigator>
                     <Stack.Screen
                         name={'Login'}
                         component={LoginScreen}
-                        options={{ title: '' }}
+                        options={{ title: '', headerShown: false }}
                     />
                     <Stack.Screen
                         name={'ForgotPassword'}
                         component={ForgotPassword}
+                        options={{ title: '' }}
                     />
                 </Stack.Navigator>
             )}

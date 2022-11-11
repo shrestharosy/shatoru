@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { Image, Pressable, Text, TouchableOpacity, View } from 'react-native';
 import tw from 'src/styles/tailwind';
 
@@ -34,8 +34,12 @@ export default function Login(props: ILoginProps) {
         resolver: yupResolver(loginSchema),
     });
 
+    const [isLoading, setIsLoading] = useState(false);
+
     const onSubmit: SubmitHandler<ILoginFormValues> = async (data) => {
+        setIsLoading(true);
         await login(data);
+        setIsLoading(false);
     };
 
     const onError: SubmitErrorHandler<ILoginFormValues> = (errors) => {
@@ -92,9 +96,10 @@ export default function Login(props: ILoginProps) {
                     <Pressable
                         onPress={methods.handleSubmit(onSubmit, onError)}
                         style={tw`bg-main p-2 rounded-md`}
+                        disabled={isLoading}
                     >
                         <Text style={tw`text-center text-lg tracking-wide`}>
-                            LOG IN
+                            {isLoading ? 'Loading...' : 'LOG IN '}
                         </Text>
                     </Pressable>
                 </View>
