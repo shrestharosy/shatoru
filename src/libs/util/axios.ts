@@ -1,20 +1,22 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios, { AxiosRequestConfig } from 'axios';
 import Config from 'src/config';
 import parseErrorMessage from 'src/libs/util/error';
+import { STORAGE } from '../constants/storage';
 
 const axiosInstance = axios.create({
     baseURL: Config.APP.BASE_URL,
     timeout: 0,
 });
 
-axiosInstance.interceptors.request.use((config) => {
-    // get token
-    // if (token) {
-    // config.headers['Authorization'] = `Bearer ${accessToken}`;
-    // return config;
-    // } else {
-    return config;
-    // }
+axiosInstance.interceptors.request.use(async (req) => {
+    const token = await AsyncStorage.getItem(STORAGE.TOKEN);
+    if (token) {
+        req.headers['Authorization'] = `Token ${token}`;
+        return req;
+    } else {
+        return req;
+    }
 });
 
 interface IClientError {

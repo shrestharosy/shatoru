@@ -6,12 +6,11 @@ const fetchdrivers = async () => {
 };
 
 const createDriver = async (payload: ICreateDriverPayload) => {
+    const { firstName, lastName, ...rest } = payload;
     const response = await axiosInstance.post(`/user/driver/`, {
-        data: {
-            ...payload,
-            first_name: payload.firstName,
-            last_name: payload.lastName,
-        },
+        ...rest,
+        first_name: payload.firstName,
+        last_name: payload.lastName,
     });
     return response.data;
 };
