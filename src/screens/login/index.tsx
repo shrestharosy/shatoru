@@ -17,7 +17,7 @@ import { IRouteProps } from 'src/libs/routes';
 import { IMAGE } from 'src/images';
 
 interface ILoginFormValues {
-    email: string;
+    username: string;
     password: string;
 }
 
@@ -34,9 +34,8 @@ export default function Login(props: ILoginProps) {
         resolver: yupResolver(loginSchema),
     });
 
-    const onSubmit: SubmitHandler<ILoginFormValues> = (data) => {
-        // console.log({ data });
-        login();
+    const onSubmit: SubmitHandler<ILoginFormValues> = async (data) => {
+        await login(data);
     };
 
     const onError: SubmitErrorHandler<ILoginFormValues> = (errors) => {
@@ -59,14 +58,13 @@ export default function Login(props: ILoginProps) {
                 <View style={tw`mt-12`}>
                     <FormProvider {...methods}>
                         <Controller
-                            name="email"
+                            name="username"
                             control={methods.control}
                             render={({ field }) => (
                                 <CustomInput
                                     {...field}
-                                    label="Email"
-                                    placeholder="shatoru@email.com"
-                                    keyboardType="email-address"
+                                    label="Username"
+                                    placeholder="shatoru"
                                 />
                             )}
                         />
