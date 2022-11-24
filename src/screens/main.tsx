@@ -6,6 +6,7 @@ import IRouteList from 'src/libs/routes';
 import Dashboard from './dashboard';
 import DriverScreen from './driver';
 import LoginScreen from './login';
+import ScheduleScreen from './schedule';
 import CreateDriverScreen from './driver/create';
 import ForgotPassword from './forgotPassword';
 
@@ -37,6 +38,11 @@ export default function Main() {
             ) : (
                 <Stack.Navigator>
                     <Stack.Screen
+                        name={'Schedule'}
+                        component={ScheduleScreen}
+                        options={{ title: '', headerShown: false }}
+                    />
+                    {/* <Stack.Screen
                         name={'Login'}
                         component={LoginScreen}
                         options={{ title: '', headerShown: false }}
@@ -45,7 +51,7 @@ export default function Main() {
                         name={'ForgotPassword'}
                         component={ForgotPassword}
                         options={{ title: '' }}
-                    />
+                    /> */}
                 </Stack.Navigator>
             )}
         </NavigationContainer>
