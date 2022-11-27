@@ -1,4 +1,4 @@
-import { View } from 'react-native';
+import { View, SafeAreaView } from 'react-native';
 import tw from 'src/styles/tailwind';
 
 interface IComponentWrapper {
@@ -6,5 +6,9 @@ interface IComponentWrapper {
 }
 
 export default function ComponentWrapper(props: IComponentWrapper) {
-    return <View style={tw`py-12 px-4`}>{props.children}</View>;
+    return (
+        <SafeAreaView>
+            <View style={tw`py-12 px-4`}>{props.children}</View>
+        </SafeAreaView>
+    );
 }
