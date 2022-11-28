@@ -1,7 +1,11 @@
+import { AxiosResponse } from 'axios';
 import axiosInstance from 'src/libs/util/axios';
+import { IStop } from './shuttle.type';
 
 const fetchStops = async () => {
-    const response = await axiosInstance.get(`/stops/`);
+    const response: AxiosResponse<Array<IStop>> = await axiosInstance.get(
+        `/stops/`
+    );
     return response.data;
 };
 

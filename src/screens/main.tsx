@@ -34,15 +34,15 @@ export default function Main() {
                         component={CreateDriverScreen}
                         options={{ title: '' }}
                     />
+                    <Stack.Screen
+                        name={'Schedule'}
+                        component={ScheduleScreen}
+                        options={{ title: '' }}
+                    />
                 </Stack.Navigator>
             ) : (
                 <Stack.Navigator>
                     <Stack.Screen
-                        name={'Schedule'}
-                        component={ScheduleScreen}
-                        options={{ title: '', headerShown: false }}
-                    />
-                    {/* <Stack.Screen
                         name={'Login'}
                         component={LoginScreen}
                         options={{ title: '', headerShown: false }}
@@ -51,7 +51,7 @@ export default function Main() {
                         name={'ForgotPassword'}
                         component={ForgotPassword}
                         options={{ title: '' }}
-                    /> */}
+                    />
                 </Stack.Navigator>
             )}
         </NavigationContainer>

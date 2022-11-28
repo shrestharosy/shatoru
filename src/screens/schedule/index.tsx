@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import { ScrollView, View, Text, Pressable } from 'react-native';
-import ComponentBackButton from 'src/components/component-backButton';
+import React, { useEffect, useState } from 'react';
+import { Pressable, Text, View } from 'react-native';
 import ComponentWrapper from 'src/components/component-wrapper';
+import { shuttleService } from 'src/services/shuttle';
+import { IStop } from 'src/services/shuttle/shuttle.type';
 import tw from 'src/styles/tailwind';
 
 interface IScheduleListProps {
@@ -10,16 +11,25 @@ interface IScheduleListProps {
 }
 
 export default function Schedule() {
-    const [scheduleList, setScheduleList] = useState<IScheduleListProps[]>([
-        { time: '12:00 AM', location: 'Fairlane Woods' },
-        { time: '12:00 AM', location: 'Fairlane Woods' },
-        { time: '12:00 AM', location: 'Fairlane Woods' },
-        { time: '12:00 AM', location: 'Fairlane Woods' },
-    ]);
+    const [stops, setStops] = useState<Array<IStop>>([]);
+
+    useEffect(() => {
+        const getStops = async () => {
+            try {
+                const response = await shuttleService.fetchStops();
+                setStops(response);
+            } catch (error) {
+                console.log(error);
+                alert('Error while fetching stops');
+            }
+        };
+
+        getStops();
+    }, []);
+
     return (
         <ComponentWrapper>
-            <View>
-                <ComponentBackButton />
+            <>
                 <View style={tw`mt-8`}>
                     <Text style={tw`text-2xl text-slate-400`}>
                         Select a schedule.
@@ -34,10 +44,13 @@ export default function Schedule() {
                     </View>
                 </View>
                 <View style={tw`mt-6`}>
-                    <Text style={tw`text-2xl mb-4`}>Details</Text>
-                    {scheduleList?.map(
+                    <Text style={tw`text-2xl mb-4`}>Available stops</Text>
+                    {stops.map((stop) => (
+                        <Text key={stop.id}>{stop.name}</Text>
+                    ))}
+                    {/* {scheduleList?.map(
                         (item: IScheduleListProps, index: number) => (
-                            <View style={tw`flex flex-row pb-2`}>
+                            <View style={tw`flex flex-row pb-2`} key={index}>
                                 <Text
                                     style={tw`w-24 ${
                                         index === 0
@@ -62,9 +75,9 @@ export default function Schedule() {
                                 </Text>
                             </View>
                         )
-                    )}
+                    )} */}
                 </View>
-            </View>
+            </>
         </ComponentWrapper>
     );
 }

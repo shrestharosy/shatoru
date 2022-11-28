@@ -9,7 +9,7 @@ export default function ComponentBackButton() {
             <View style={tw`w-8 rounded-full`}>
                 <Image
                     source={IMAGE.LEFTARROW}
-                    style={tw`object-contain w-8 h-4`}
+                    // style={tw`object-contain w-8 h-4`}
                 />
             </View>
             <Text style={tw`w-32 ml-1.5`}>Back</Text>

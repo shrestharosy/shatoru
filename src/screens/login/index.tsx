@@ -38,12 +38,17 @@ export default function Login(props: ILoginProps) {
 
     const onSubmit: SubmitHandler<ILoginFormValues> = async (data) => {
         setIsLoading(true);
-        await login(data);
-        setIsLoading(false);
+        try {
+            await login(data);
+        } catch (error) {
+            console.log('error');
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     const onError: SubmitErrorHandler<ILoginFormValues> = (errors) => {
-        // return console.log({ errors });
+        return console.log({ errors });
     };
 
     return (
