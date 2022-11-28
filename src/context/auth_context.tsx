@@ -36,6 +36,7 @@ export const AuthProvider = ({ children }: IAuthProviderProps) => {
             setAuthStatus();
         } catch (error) {
             console.log(error);
+            alert(error.message);
             throw error;
         }
     };

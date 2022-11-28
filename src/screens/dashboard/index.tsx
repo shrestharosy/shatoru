@@ -21,6 +21,12 @@ const Dashboard = ({ navigation }: IDashboard) => {
                     onPress={() => navigation.navigate('Driver')}
                 />
             </View>
+            <View>
+                <Button
+                    title="Schedule"
+                    onPress={() => navigation.navigate('Schedule')}
+                />
+            </View>
         </SafeAreaView>
     );
 };
