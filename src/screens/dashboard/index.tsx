@@ -23,8 +23,8 @@ const Dashboard = ({ navigation }: IDashboard) => {
             </View>
             <View>
                 <Button
-                    title="Schedule"
-                    onPress={() => navigation.navigate('Schedule')}
+                    title="Shuttle"
+                    onPress={() => navigation.navigate('Shuttle')}
                 />
             </View>
         </SafeAreaView>

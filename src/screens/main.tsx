@@ -6,7 +6,8 @@ import IRouteList from 'src/libs/routes';
 import Dashboard from './dashboard';
 import DriverScreen from './driver';
 import LoginScreen from './login';
-import ScheduleScreen from './schedule';
+import Shuttle from './shuttle';
+import CreateShuttleScreen from './shuttle/create';
 import CreateDriverScreen from './driver/create';
 import ForgotPassword from './forgotPassword';
 
@@ -35,8 +36,13 @@ export default function Main() {
                         options={{ title: '' }}
                     />
                     <Stack.Screen
-                        name={'Schedule'}
-                        component={ScheduleScreen}
+                        name={'Shuttle'}
+                        component={Shuttle}
+                        options={{ title: '' }}
+                    />
+                    <Stack.Screen
+                        name={'CreateShuttle'}
+                        component={CreateShuttleScreen}
                         options={{ title: '' }}
                     />
                 </Stack.Navigator>

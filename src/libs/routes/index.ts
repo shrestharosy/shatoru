@@ -6,7 +6,8 @@ type IRouteList = {
     Driver: undefined;
     CreateDriver: undefined;
     ForgotPassword: undefined;
-    Schedule: undefined;
+    Shuttle: undefined;
+    CreateShuttle: undefined;
 };
 
 export interface IRouteProps extends NativeStackScreenProps<IRouteList> {}
