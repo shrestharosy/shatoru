@@ -32,6 +32,7 @@ function parseClientError(error: IClientError) {
         message: 'Something went wrong',
         status: 'CLIENT_ERROR',
     };
+    console.log(error, '==============');
     if (error.message === 'Network Error') {
         parsedError = {
             message: 'Network Error',

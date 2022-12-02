@@ -1,6 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import React, { useState } from 'react';
-import { object as YupObject, string as YupString } from 'yup';
+import { useState } from 'react';
 import {
     Controller,
     FormProvider,
@@ -10,16 +9,22 @@ import {
 } from 'react-hook-form';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { CustomInput } from 'src/components/form/CustomTextInput';
-import tw from 'src/styles/tailwind';
 import { IMAGE } from 'src/images';
+import { IRouteProps } from 'src/libs/routes';
 import { userService } from 'src/services/user';
+import tw from 'src/styles/tailwind';
+import { object as YupObject, string as YupString } from 'yup';
 
-interface IForgotPasswordFormValues {
+interface IForgotPasswordFormValues extends IRouteProps {
     email: string;
 }
 
-export default function ForgotPassword() {
+export default function ForgotPassword(props: IForgotPasswordFormValues) {
     const [isLoading, setIsLoading] = useState(false);
+
+    const {
+        navigation: { navigate },
+    } = props;
 
     const { ...methods } = useForm<{ email: string }>({
         resolver: yupResolver(
@@ -35,6 +40,7 @@ export default function ForgotPassword() {
         try {
             setIsLoading(true);
             await userService.sendCode(data.email);
+            navigate('OTP');
             alert('Please check your email for a 6-digit code');
         } catch (error: any) {
             console.log(error);

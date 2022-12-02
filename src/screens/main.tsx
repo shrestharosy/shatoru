@@ -9,6 +9,7 @@ import LoginScreen from './login';
 import ScheduleScreen from './schedule';
 import CreateDriverScreen from './driver/create';
 import ForgotPassword from './forgotPassword';
+import OTP from './forgotPassword/otp';
 
 const Stack = createNativeStackNavigator<IRouteList>();
 
@@ -50,6 +51,11 @@ export default function Main() {
                     <Stack.Screen
                         name={'ForgotPassword'}
                         component={ForgotPassword}
+                        options={{ title: '' }}
+                    />
+                    <Stack.Screen
+                        name={'OTP'}
+                        component={OTP}
                         options={{ title: '' }}
                     />
                 </Stack.Navigator>
