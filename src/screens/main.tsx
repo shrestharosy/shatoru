@@ -9,6 +9,7 @@ import LoginScreen from './login';
 import ScheduleScreen from './schedule';
 import CreateDriverScreen from './driver/create';
 import ForgotPassword from './forgotPassword';
+import GenerateSchedule from './generateSchedule';
 
 const Stack = createNativeStackNavigator<IRouteList>();
 
@@ -38,8 +39,8 @@ export default function Main() {
             ) : (
                 <Stack.Navigator>
                     <Stack.Screen
-                        name={'Schedule'}
-                        component={ScheduleScreen}
+                        name={'Generate'}
+                        component={GenerateSchedule}
                         options={{ title: '', headerShown: false }}
                     />
                     {/* <Stack.Screen
