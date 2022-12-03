@@ -15,6 +15,7 @@ import { AuthContext } from 'src/context/auth_context';
 import loginSchema from 'src/libs/validation-schema/login_schema';
 import { IRouteProps } from 'src/libs/routes';
 import { IMAGE } from 'src/images';
+import Loader from 'src/components/loader';
 
 interface ILoginFormValues {
     username: string;
@@ -103,9 +104,13 @@ export default function Login(props: ILoginProps) {
                         style={tw`bg-main p-2 rounded-md`}
                         disabled={isLoading}
                     >
-                        <Text style={tw`text-center text-lg tracking-wide`}>
-                            {isLoading ? 'Loading...' : 'LOG IN '}
-                        </Text>
+                        {isLoading ? (
+                            <Loader />
+                        ) : (
+                            <Text style={tw`text-center text-lg tracking-wide`}>
+                                LOG IN
+                            </Text>
+                        )}
                     </Pressable>
                 </View>
             </View>
