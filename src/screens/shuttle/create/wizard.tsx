@@ -29,7 +29,8 @@ interface IShuttleFormValues {
     name: string;
     stops: Array<IStopDetails>;
     stopIds: Array<string>;
-    startTime: string;
+    startTime: Date;
+    endTime: Date;
 }
 
 interface IStopDetails {
@@ -40,6 +41,8 @@ interface IStopDetails {
 export const defaultValues = {
     name: 'Blue Shuttle',
     stops: [],
+    startTime: new Date(),
+    endTime: new Date(),
 };
 
 const MultiStepForm = () => {
