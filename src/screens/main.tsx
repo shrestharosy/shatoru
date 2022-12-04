@@ -1,5 +1,8 @@
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {
+    createNativeStackNavigator,
+    NativeStackNavigationOptions,
+} from '@react-navigation/native-stack';
 import React, { useContext } from 'react';
 import { AuthContext } from 'src/context/auth_context';
 import IRouteList from 'src/libs/routes';
@@ -9,11 +12,24 @@ import LoginScreen from './login';
 import ScheduleScreen from './schedule';
 import CreateDriverScreen from './driver/create';
 import ForgotPassword from './forgotPassword';
+import tw from 'src/styles/tailwind';
+import ComponentRightHeader from 'src/components/component-header/componentRightHeader';
+import ComponentLeftHeader from 'src/components/component-header/componentLeftHeader';
 
 const Stack = createNativeStackNavigator<IRouteList>();
 
+interface IProps extends NativeStackNavigationOptions {}
+
+const headerDetail: IProps = {
+    title: '',
+    // headerBackground: () => '#FFCB05',
+    headerLeft: () => <ComponentLeftHeader />,
+    headerRight: () => <ComponentRightHeader />,
+};
+
 export default function Main() {
-    const { isLoggedIn } = useContext(AuthContext);
+    // const { isLoggedIn } = useContext(AuthContext);
+    const [isLoggedIn, setIsLoggedIn] = React.useState(true);
 
     return (
         <NavigationContainer>
@@ -22,7 +38,7 @@ export default function Main() {
                     <Stack.Screen
                         name={'Dashboard'}
                         component={Dashboard}
-                        options={{ title: '' }}
+                        // options={headerDetail}
                     />
                     <Stack.Screen
                         name={'Driver'}

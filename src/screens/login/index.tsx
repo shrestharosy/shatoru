@@ -36,15 +36,19 @@ export default function Login(props: ILoginProps) {
 
     const [isLoading, setIsLoading] = useState(false);
 
-    const onSubmit: SubmitHandler<ILoginFormValues> = async (data) => {
-        setIsLoading(true);
-        try {
-            await login(data);
-        } catch (error) {
-            console.log('error');
-        } finally {
-            setIsLoading(false);
-        }
+    // const onSubmit: SubmitHandler<ILoginFormValues> = async (data) => {
+    //     setIsLoading(true);
+    //     try {
+    //         await login(data);
+    //     } catch (error) {
+    //         console.log('error');
+    //     } finally {
+    //         setIsLoading(false);
+    //     }
+    // };
+
+    const onSubmit = () => {
+        // navigate("Dashboard")
     };
 
     const onError: SubmitErrorHandler<ILoginFormValues> = (errors) => {
