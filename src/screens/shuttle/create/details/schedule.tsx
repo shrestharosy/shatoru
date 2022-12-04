@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Controller, useFormContext, useFieldArray } from 'react-hook-form';
 import { StyleSheet, Text, View, TextInput, Pressable } from 'react-native';
 import { MultiSelect } from 'react-native-element-dropdown';
+import { Label } from 'src/components/form/Label';
 import { shuttleService } from 'src/services/shuttle';
 import { IOption } from 'src/services/shuttle/shuttle.type';
 import tw from 'src/styles/tailwind';
@@ -58,7 +59,7 @@ const ScheduleDetails = () => {
 
     return (
         <View>
-            <Text style={tw`mb-2 ml-1`}>Select stops</Text>
+            <Label label={'Select Stops'} />
             <Controller
                 name="stops"
                 control={control}

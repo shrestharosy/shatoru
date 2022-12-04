@@ -98,11 +98,13 @@ const MultiStepForm = () => {
                 <Pressable
                     style={tw`bg-main p-2 rounded-md w-24`}
                     onPress={previous}
+                    disabled={id === StepsEnum.primary}
                 >
                     <Text style={tw`text-center text-base tracking-wide`}>
                         Previous
                     </Text>
                 </Pressable>
+
                 {id !== StepsEnum.submit && (
                     <Pressable
                         style={tw`bg-main p-2 rounded-md w-24`}
