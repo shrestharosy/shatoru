@@ -30,7 +30,7 @@ const Dashboard = ({ navigation }: IDashboard) => {
         <ComponentWrapper>
             <View style={tw`relative h-full`}>
                 <DrawerRight />
-                {/* <DrawerLeft navigation={navigation}/> */}
+                <DrawerLeft navigation={navigation} />
                 <View style={tw`flex`}>
                     <Pressable onPress={() => navigation.navigate('Driver')}>
                         <Text>sdfa</Text>

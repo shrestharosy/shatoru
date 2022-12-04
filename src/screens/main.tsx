@@ -3,18 +3,16 @@ import {
     createNativeStackNavigator,
     NativeStackNavigationOptions,
 } from '@react-navigation/native-stack';
-import React, { useContext } from 'react';
-import { AuthContext } from 'src/context/auth_context';
+import React from 'react';
+import ComponentLeftHeader from 'src/components/component-header/componentLeftHeader';
+import ComponentRightHeader from 'src/components/component-header/componentRightHeader';
 import IRouteList from 'src/libs/routes';
 import Dashboard from './dashboard';
 import DriverScreen from './driver';
-import LoginScreen from './login';
-import ScheduleScreen from './schedule';
 import CreateDriverScreen from './driver/create';
 import ForgotPassword from './forgotPassword';
-import tw from 'src/styles/tailwind';
-import ComponentRightHeader from 'src/components/component-header/componentRightHeader';
-import ComponentLeftHeader from 'src/components/component-header/componentLeftHeader';
+import LoginScreen from './login';
+import ScheduleScreen from './schedule';
 
 const Stack = createNativeStackNavigator<IRouteList>();
 
@@ -38,7 +36,7 @@ export default function Main() {
                     <Stack.Screen
                         name={'Dashboard'}
                         component={Dashboard}
-                        // options={headerDetail}
+                        options={headerDetail}
                     />
                     <Stack.Screen
                         name={'Driver'}
