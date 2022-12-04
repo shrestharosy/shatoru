@@ -15,16 +15,18 @@ const ScheduleDetails = () => {
     const { control, register, getValues, setValue } = formContext;
     const { fields, append, remove, prepend } = useFieldArray({
         control,
-        name: 'stop',
+        name: 'stops',
     });
 
     useEffect(() => {
-        const selectedStops = getValues('stops');
-        setSelected(selectedStops);
-        selectedStops.map((selectedStop, index) =>
-            setValue(`stop[${index}].name`, selectedStop)
-        );
-    }, [getValues('stops')]);
+        const selectedStops = getValues('stopIds');
+        if (selectedStops) {
+            setSelected(selectedStops);
+            selectedStops.map((selectedStop, index) =>
+                setValue(`stops[${index}].name`, selectedStop)
+            );
+        }
+    }, [getValues('stopIds')]);
 
     useEffect(() => {
         const getStops = async () => {
@@ -51,7 +53,7 @@ const ScheduleDetails = () => {
         } else {
             {
                 return stopsList.find(
-                    (stop) => stop.value === getValues(`stops[${index}]`)
+                    (stop) => stop.value === getValues(`stopIds[${index}]`)
                 )?.label;
             }
         }
@@ -61,7 +63,7 @@ const ScheduleDetails = () => {
         <View>
             <Label label={'Select Stops'} />
             <Controller
-                name="stops"
+                name="stopIds"
                 control={control}
                 render={({ field }) => (
                     <MultiSelect
@@ -80,7 +82,7 @@ const ScheduleDetails = () => {
                         searchPlaceholder="Search..."
                         onChange={(item) => {
                             setSelected(item);
-                            setValue('stops', item);
+                            setValue('stopIds', item);
                             append({ name: getStopName(item) });
                         }}
                         // renderItem={renderDataItem}
@@ -107,9 +109,9 @@ const ScheduleDetails = () => {
                                 style={tw`text-center justify-center items-center`}
                             >
                                 <Controller
-                                    name={`stop[${index}].name`}
+                                    name={`stops[${index}].name`}
                                     defaultValue={getValues(
-                                        `stop[${index}].name`
+                                        `stops[${index}].name`
                                     )}
                                     control={control}
                                     render={() => (
@@ -130,7 +132,7 @@ const ScheduleDetails = () => {
                             >
                                 <View>
                                     <Controller
-                                        name={`stop[${index}].interval`}
+                                        name={`stops[${index}].interval`}
                                         defaultValue={item['interval']}
                                         control={control}
                                         render={({ field }) => (
@@ -154,7 +156,7 @@ const ScheduleDetails = () => {
                                                     (item) =>
                                                         item !==
                                                         getValues(
-                                                            `stop[${index}].name`
+                                                            `stops[${index}].name`
                                                         )
                                                 )
                                             );

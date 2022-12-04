@@ -28,6 +28,8 @@ const steps = [
 interface IShuttleFormValues {
     name: string;
     stops: Array<IStopDetails>;
+    stopIds: Array<string>;
+    startTime: string;
 }
 
 interface IStopDetails {
@@ -37,12 +39,7 @@ interface IStopDetails {
 
 export const defaultValues = {
     name: 'Blue Shuttle',
-    stops: [
-        // {
-        //     name: '',
-        //     interval: 10,
-        // },
-    ],
+    stops: [],
 };
 
 const MultiStepForm = () => {
@@ -56,14 +53,12 @@ const MultiStepForm = () => {
         navigation,
     } = useStep({ initialStep: 0, steps });
 
-    const props = { navigation, methods };
-
     const { next, previous } = navigation;
 
     const getForm = () => {
         switch (id) {
             case StepsEnum.primary:
-                return <PrimaryDetails {...props} />;
+                return <PrimaryDetails />;
             case StepsEnum.schedule:
                 return <ScheduleDetails />;
             default:
@@ -77,7 +72,6 @@ const MultiStepForm = () => {
         setIsLoading(true);
         try {
             console.log(data);
-            // console.log(data.stops.map((stop) => stop));
         } catch (error) {
             console.log('error');
         } finally {
