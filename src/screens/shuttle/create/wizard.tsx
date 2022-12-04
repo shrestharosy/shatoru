@@ -7,7 +7,8 @@ import {
     UseFormReturn,
 } from 'react-hook-form';
 import { useStep } from 'react-hooks-helper';
-import { View, Text, Pressable } from 'react-native';
+import { View, Text, Pressable, ScrollView } from 'react-native';
+import Loader from 'src/components/loader';
 import tw from 'src/styles/tailwind';
 import PrimaryDetails from './details/primary';
 import ScheduleDetails from './details/schedule';
@@ -25,14 +26,29 @@ const steps = [
 ];
 
 interface IShuttleFormValues {
-    shuttleName: string;
-    shuttleSchedule: string;
+    name: string;
+    stops: Array<IStopDetails>;
 }
+
+interface IStopDetails {
+    name: string;
+    interval: number;
+}
+
+export const defaultValues = {
+    name: 'Blue Shuttle',
+    stops: [
+        // {
+        //     name: '',
+        //     interval: 10,
+        // },
+    ],
+};
 
 const MultiStepForm = () => {
     const { ...methods }: UseFormReturn<IShuttleFormValues> =
         useForm<IShuttleFormValues>({
-            defaultValues: { shuttleName: 'Blue Shuttle' },
+            defaultValues,
         });
 
     const {
@@ -49,50 +65,19 @@ const MultiStepForm = () => {
             case StepsEnum.primary:
                 return <PrimaryDetails {...props} />;
             case StepsEnum.schedule:
-                return <ScheduleDetails {...props} />;
-            case StepsEnum.submit:
-                return <Submit {...props} />;
+                return <ScheduleDetails />;
             default:
-                return <Submit {...props} />;
+                return null;
         }
     };
 
-    return (
-        <>
-            <View style={tw`py-5 px-2`}>
-                <FormProvider {...methods}>{getForm()}</FormProvider>
-            </View>
-            <View>
-                <Pressable
-                    style={tw`bg-main p-2 rounded-md`}
-                    onPress={previous}
-                >
-                    <Text style={tw`text-center text-lg tracking-wide`}>
-                        Previous
-                    </Text>
-                </Pressable>
-                {id !== StepsEnum.submit && (
-                    <Pressable
-                        style={tw`bg-main p-2 rounded-md`}
-                        onPress={next}
-                    >
-                        <Text style={tw`text-center text-lg tracking-wide`}>
-                            Next
-                        </Text>
-                    </Pressable>
-                )}
-            </View>
-        </>
-    );
-};
-
-const Submit = ({ methods }) => {
     const [isLoading, setIsLoading] = useState(false);
 
     const onSubmit: SubmitHandler<IShuttleFormValues> = async (data) => {
         setIsLoading(true);
         try {
             console.log(data);
+            // console.log(data.stops.map((stop) => stop));
         } catch (error) {
             console.log('error');
         } finally {
@@ -105,20 +90,78 @@ const Submit = ({ methods }) => {
     };
 
     return (
-        <View>
-            <Text>Thank you for submitting</Text>
-            <Text>New Form {'->'}</Text>
-            <Pressable
-                onPress={methods.handleSubmit(onSubmit, onError)}
-                style={tw`bg-main p-2 rounded-md`}
-                disabled={isLoading}
-            >
-                <Text style={tw`text-center text-lg tracking-wide`}>
-                    {isLoading ? 'Loading...' : 'Submit '}
-                </Text>
-            </Pressable>
-        </View>
+        <ScrollView>
+            <View style={tw`py-5 px-2`}>
+                <FormProvider {...methods}>{getForm()}</FormProvider>
+            </View>
+            <View style={tw`flex flex-row justify-between p-2`}>
+                <Pressable
+                    style={tw`bg-main p-2 rounded-md w-24`}
+                    onPress={previous}
+                >
+                    <Text style={tw`text-center text-base tracking-wide`}>
+                        Previous
+                    </Text>
+                </Pressable>
+                {id !== StepsEnum.submit && (
+                    <Pressable
+                        style={tw`bg-main p-2 rounded-md w-24`}
+                        onPress={next}
+                    >
+                        <Text style={tw`text-center text-base tracking-wide`}>
+                            Next
+                        </Text>
+                    </Pressable>
+                )}
+                {id === StepsEnum.submit && (
+                    <Pressable
+                        style={tw`bg-main p-2 rounded-md w-24`}
+                        onPress={methods.handleSubmit(onSubmit, onError)}
+                    >
+                        <Text style={tw`text-center text-base tracking-wide`}>
+                            {isLoading ? <Loader /> : 'Submit '}
+                        </Text>
+                    </Pressable>
+                )}
+            </View>
+        </ScrollView>
     );
 };
+
+// const Submit = ({ methods }) => {
+//     const [isLoading, setIsLoading] = useState(false);
+
+//     const onSubmit: SubmitHandler<IShuttleFormValues> = async (data) => {
+//         setIsLoading(true);
+//         try {
+//             console.log(data);
+//             // console.log(data.stops.map((stop) => stop));
+//         } catch (error) {
+//             console.log('error');
+//         } finally {
+//             setIsLoading(false);
+//         }
+//     };
+
+//     const onError: SubmitErrorHandler<IShuttleFormValues> = (errors) => {
+//         return console.log({ errors });
+//     };
+
+//     return (
+//         <View>
+//             <Text>Thank you for submitting</Text>
+//             <Text>New Form {'->'}</Text>
+//             <Pressable
+//                 onPress={methods.handleSubmit(onSubmit, onError)}
+//                 style={tw`bg-main p-2 rounded-md`}
+//                 disabled={isLoading}
+//             >
+//                 <Text style={tw`text-center text-lg tracking-wide`}>
+//                     {isLoading ? 'Loading...' : 'Submit '}
+//                 </Text>
+//             </Pressable>
+//         </View>
+//     );
+// };
 
 export default MultiStepForm;

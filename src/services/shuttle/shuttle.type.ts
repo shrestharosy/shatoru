@@ -3,3 +3,8 @@ export interface IStop {
     name: string;
     abbreviation: string;
 }
+
+export interface IOption {
+    label: string;
+    value: string;
+}

@@ -7,7 +7,7 @@ const PrimaryDetails = ({ methods }) => {
     return (
         <View>
             <Controller
-                name="shuttleName"
+                name="name"
                 control={methods.control}
                 render={({ field }) => (
                     <CustomInput
