@@ -31,15 +31,19 @@ const Dashboard = ({ navigation }: IDashboard) => {
             <View style={tw`relative h-full`}>
                 <DrawerRight />
                 <DrawerLeft navigation={navigation} />
-                <View style={tw`flex`}>
-                    <Pressable onPress={() => navigation.navigate('Driver')}>
-                        <Text>sdfa</Text>
-                    </Pressable>
-                    <ComponentCard image={IMAGE.SHUTTLE} name="SHUTTLE" />
+                <View style={tw`flex flex-row`}>
                     <ComponentCard
+                        image={IMAGE.BUS}
+                        name="SHUTTLE"
+                        navigation={navigation}
+                        route="Driver"
+                    />
+                    <ComponentCard
+                        navigation={navigation}
                         image={IMAGE.DRIVER}
                         name="DRIVER"
-                        style="mt-4"
+                        route="CreateDriver"
+                        style="ml-4"
                     />
                 </View>
             </View>
@@ -47,6 +51,6 @@ const Dashboard = ({ navigation }: IDashboard) => {
     );
 };
 
-export default Dashboard;
+export default withProtectedScreen(Dashboard);
 
 const styles = StyleSheet.create({});

@@ -14,7 +14,7 @@ export default function DrawerRight() {
         <View
             style={tw`absolute ${
                 isRightDrawerOpen !== true && 'hidden'
-            } -top-2 right-0`}
+            } -top-2 right-0 z-20`}
         >
             <FlatList
                 data={drawerOption}

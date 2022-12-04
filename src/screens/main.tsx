@@ -59,7 +59,7 @@ export default function Main() {
                     <Stack.Screen
                         name={'Login'}
                         component={LoginScreen}
-                        options={{ title: '', headerShown: false }}
+                        options={{ headerShown: false }}
                     />
                     <Stack.Screen
                         name={'ForgotPassword'}

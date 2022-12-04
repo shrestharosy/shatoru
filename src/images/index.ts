@@ -6,4 +6,5 @@ export const IMAGE = {
     DROPDOWN: require('./dropDown.png'),
     ADD: require('./add.png'),
     DRIVER: require('./driver.png'),
+    BUS: require('./bus.png'),
 };

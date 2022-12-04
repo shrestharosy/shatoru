@@ -8,19 +8,25 @@ interface ICardProps {
     image: any;
     name: string;
     style?: string;
+    navigation: any;
+    route: string;
 }
 
 export default function ComponentCard(props: ICardProps) {
-    const { image, name, style } = props;
+    const { image, name, style, navigation, route } = props;
     return (
-        <View style={tw`${style} bg-white rounded-xl h-52 w-52 p-2`}>
+        <View style={tw`${style} bg-white rounded-xl h-40 w-40 p-2`}>
             <View style={tw`relative`}>
-                <Image source={image} style={tw`h-4/5 w-full`} />
+                <Image
+                    source={image}
+                    style={tw`h-4/5 w-2/3 mx-auto`}
+                    resizeMode="contain"
+                />
             </View>
             <View style={tw`flex flex-row justify-between items-center`}>
-                <Text style={tw`text-2xl font-bold`}>{name}</Text>
-                <Pressable onPress={() => console.log('Dashboard')}>
-                    <View style={tw`rounded-full w-10 h-10 bg-main`}>
+                <Text style={tw`text-xl font-bold`}>{name}</Text>
+                <Pressable onPress={() => navigation.navigate(route)}>
+                    <View style={tw`rounded-full w-6 h-6 bg-main`}>
                         <Image
                             source={IMAGE.ADD}
                             style={tw`w-full h-full text-black `}
