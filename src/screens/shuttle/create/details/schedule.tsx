@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { Controller, useFormContext, useFieldArray } from 'react-hook-form';
-import { StyleSheet, Text, View, TextInput, Pressable } from 'react-native';
-import { MultiSelect } from 'react-native-element-dropdown';
+import { Controller, useFieldArray, useFormContext } from 'react-hook-form';
+import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
+import CustomMultiSelect from 'src/components/form/CustomMultiSelect';
 import { Label } from 'src/components/form/Label';
 import { shuttleService } from 'src/services/shuttle';
 import { IOption } from 'src/services/shuttle/shuttle.type';
 import tw from 'src/styles/tailwind';
 
 const ScheduleDetails = () => {
-    const [selected, setSelected] = React.useState([]);
+    const [selectedOptions, setSelectedOptions] = React.useState<Array<string>>(
+        []
+    );
     const [stopsList, setStopsList] = useState<Array<IOption>>([]);
 
     const formContext = useFormContext();
@@ -21,7 +23,7 @@ const ScheduleDetails = () => {
     useEffect(() => {
         const selectedStops = getValues('stopIds');
         if (selectedStops) {
-            setSelected(selectedStops);
+            setSelectedOptions(selectedStops);
             selectedStops.map((selectedStop, index) =>
                 setValue(`stops[${index}].name`, selectedStop)
             );
@@ -66,41 +68,22 @@ const ScheduleDetails = () => {
                 name="stopIds"
                 control={control}
                 render={({ field }) => (
-                    <MultiSelect
-                        {...field}
-                        style={styles.dropdown}
-                        placeholderStyle={styles.placeholderStyle}
-                        selectedTextStyle={styles.selectedTextStyle}
-                        inputSearchStyle={styles.inputSearchStyle}
-                        iconStyle={styles.iconStyle}
-                        data={stopsList}
-                        labelField="label"
-                        valueField="value"
-                        placeholder={`${selected.length} stops selected`}
-                        value={selected}
-                        search
-                        searchPlaceholder="Search..."
+                    <CustomMultiSelect
+                        name="stopIds"
+                        options={stopsList}
+                        selectedOptions={selectedOptions}
                         onChange={(item) => {
-                            setSelected(item);
+                            setSelectedOptions(item);
                             setValue('stopIds', item);
                             append({ name: getStopName(item) });
                         }}
-                        // renderItem={renderDataItem}
-                        renderSelectedItem={(item, unSelect) => (
-                            <></>
-                            // <TouchableOpacity
-                            //     onPress={() => unSelect && unSelect(item)}
-                            // >
-                            //     <Text style={styles.textSelectedStyle}>
-                            //         {item.label}
-                            //     </Text>
-                            // </TouchableOpacity>
-                        )}
                     />
                 )}
             />
 
-            <View style={tw`mt-4 p-4 ${selected.length > 0 && `bg-white`}`}>
+            <View
+                style={tw`mt-4 p-4 ${selectedOptions.length > 0 && `bg-white`}`}
+            >
                 {fields.map((item, index) => {
                     return (
                         <View style={tw`flex flex-row justify-between`}>
@@ -133,7 +116,7 @@ const ScheduleDetails = () => {
                                 <View>
                                     <Controller
                                         name={`stops[${index}].interval`}
-                                        defaultValue={item['interval']}
+                                        defaultValue={item['interval'] ?? '10'}
                                         control={control}
                                         render={({ field }) => (
                                             <TextInput
@@ -151,8 +134,8 @@ const ScheduleDetails = () => {
                                     <Pressable
                                         style={tw`p-4`}
                                         onPress={() => {
-                                            setSelected(
-                                                selected.filter(
+                                            setSelectedOptions(
+                                                selectedOptions.filter(
                                                     (item) =>
                                                         item !==
                                                         getValues(
