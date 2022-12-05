@@ -19,17 +19,17 @@ const Dashboard = ({ navigation }: IDashboard) => {
                 {/* <DrawerLeft navigation={navigation} /> */}
                 <View style={tw`flex flex-row justify-around`}>
                     <ComponentCard
-                        image={IMAGE.BUS}
-                        name="SHUTTLE"
-                        navigation={navigation}
-                        route="Shuttle"
-                    />
-                    <ComponentCard
                         navigation={navigation}
                         image={IMAGE.DRIVER}
-                        name="DRIVER"
+                        name="Drivers"
                         route="Driver"
                         style="ml-4"
+                    />
+                    <ComponentCard
+                        image={IMAGE.BUS}
+                        name="Shuttles"
+                        navigation={navigation}
+                        route="Shuttle"
                     />
                 </View>
             </View>
