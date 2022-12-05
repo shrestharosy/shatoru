@@ -63,10 +63,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     input: {
-        borderWidth: 1,
+        // borderWidth: 1,
         height: 50,
         padding: 10,
         borderRadius: 4,
+        backgroundColor: 'white',
     },
     errorContainer: {
         flex: -1,

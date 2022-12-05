@@ -86,7 +86,10 @@ const ScheduleDetails = () => {
             >
                 {fields.map((item, index) => {
                     return (
-                        <View style={tw`flex flex-row justify-between`}>
+                        <View
+                            key={item.id}
+                            style={tw`flex flex-row justify-between`}
+                        >
                             <View
                                 key={item.id}
                                 style={tw`text-center justify-center items-center`}

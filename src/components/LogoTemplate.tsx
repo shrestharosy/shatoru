@@ -13,7 +13,7 @@ export const LogoTemplate: FC<LogoProps> = ({ image }) => {
             <Text
                 style={tw`text-brownRed text-base text-center mt-2 font-bold`}
             >
-                UMD Shuttle Service
+                Shatoru
             </Text>
         </View>
     );

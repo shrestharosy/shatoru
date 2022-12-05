@@ -59,7 +59,7 @@ export default function Login(props: ILoginProps) {
                 <Text
                     style={tw`text-brownRed text-base text-center mt-2 font-bold`}
                 >
-                    UMD Shuttle Service
+                    Shatoru
                 </Text>
             </View>
             <View style={tw`mt-4`}>
@@ -108,7 +108,7 @@ export default function Login(props: ILoginProps) {
                             <Loader />
                         ) : (
                             <Text style={tw`text-center text-lg tracking-wide`}>
-                                LOG IN
+                                Log In
                             </Text>
                         )}
                     </Pressable>
