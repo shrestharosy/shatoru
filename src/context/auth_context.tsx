@@ -2,12 +2,14 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createContext, ReactElement, useEffect, useState } from 'react';
 import { STORAGE } from 'src/libs/constants/storage';
 import { authService } from 'src/services/auth';
+import { IUser } from 'src/services/user/user.type';
 
 interface IAuthContextValues {
     isLoading: boolean | null;
+    isLoggedIn: boolean;
+    user: IUser | null;
     login: (payload: ILogin) => void;
     logout: () => void;
-    isLoggedIn: boolean;
 }
 
 export const AuthContext = createContext<IAuthContextValues>({
@@ -22,6 +24,7 @@ interface IAuthProviderProps {
 export const AuthProvider = ({ children }: IAuthProviderProps) => {
     const [isLoading, setIsLoading] = useState(true);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [user, setUser] = useState<IUser>(null);
     const [token, setToken] = useState<string | null>(null);
 
     useEffect(() => {
@@ -31,7 +34,10 @@ export const AuthProvider = ({ children }: IAuthProviderProps) => {
     const login = async (payload: ILogin) => {
         try {
             const response = await authService.login(payload);
-            AsyncStorage.setItem(STORAGE.TOKEN, response.token);
+            const { token, ...rest } = response;
+            AsyncStorage.setItem(STORAGE.TOKEN, token);
+            AsyncStorage.setItem(STORAGE.USER, JSON.stringify(rest));
+            setUser(user);
             setToken(token);
             setAuthStatus();
         } catch (error) {
@@ -43,6 +49,7 @@ export const AuthProvider = ({ children }: IAuthProviderProps) => {
 
     const logout = () => {
         AsyncStorage.removeItem(STORAGE.TOKEN);
+        AsyncStorage.removeItem(STORAGE.USER);
         setToken(null);
         setAuthStatus();
     };
@@ -51,10 +58,13 @@ export const AuthProvider = ({ children }: IAuthProviderProps) => {
         setIsLoading(true);
         try {
             const activeToken = await AsyncStorage.getItem(STORAGE.TOKEN);
-            if (!activeToken) {
+            const activeUser = await AsyncStorage.getItem(STORAGE.USER);
+            if (!activeToken || !activeUser) {
                 setIsLoggedIn(false);
             } else {
                 setIsLoggedIn(true);
+                const parsedUser = JSON.parse(activeUser);
+                setUser(parsedUser);
             }
         } catch (error) {
             console.log(error);
@@ -65,7 +75,9 @@ export const AuthProvider = ({ children }: IAuthProviderProps) => {
     };
 
     return (
-        <AuthContext.Provider value={{ isLoading, isLoggedIn, login, logout }}>
+        <AuthContext.Provider
+            value={{ isLoading, isLoggedIn, user, login, logout }}
+        >
             {children}
         </AuthContext.Provider>
     );
