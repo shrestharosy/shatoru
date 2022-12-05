@@ -9,6 +9,8 @@ import {
 import { useStep } from 'react-hooks-helper';
 import { View, Text, Pressable, ScrollView } from 'react-native';
 import Loader from 'src/components/loader';
+import { shuttleService } from 'src/services/shuttle';
+import { IStopJSON } from 'src/services/shuttle/shuttle.type';
 import tw from 'src/styles/tailwind';
 import PrimaryDetails from './details/primary';
 import ScheduleDetails from './details/schedule';
@@ -31,6 +33,7 @@ interface IShuttleFormValues {
     stopIds: Array<string>;
     startTime: Date;
     endTime: Date;
+    days: Array<string>;
 }
 
 interface IStopDetails {
@@ -74,7 +77,28 @@ const MultiStepForm = () => {
     const onSubmit: SubmitHandler<IShuttleFormValues> = async (data) => {
         setIsLoading(true);
         try {
-            console.log(data);
+            const {
+                name: shuttle,
+                startTime: start_time,
+                endTime: end_time,
+                days,
+                stops,
+            } = data;
+            let formattedStops: IStopJSON = {};
+            stops.forEach((stop) => {
+                formattedStops = {
+                    ...formattedStops,
+                    [stop.name]: stop.interval,
+                };
+            });
+            await shuttleService.createShuttle({
+                shuttle,
+                start_time,
+                end_time,
+                days,
+                stops: formattedStops,
+            });
+            alert('Shuttle created successfully');
         } catch (error) {
             console.log('error');
         } finally {
