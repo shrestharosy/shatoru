@@ -18,7 +18,13 @@ const createDriver = async (payload: ICreateDriverPayload) => {
     return response.data;
 };
 
+const deleteDriver = async (id: number) => {
+    const response = await axiosInstance.delete(`/user/driver/${id}/delete/`);
+    return response.data;
+};
+
 export const driverService = {
     fetchdrivers,
     createDriver,
+    deleteDriver,
 };
