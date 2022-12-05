@@ -27,12 +27,12 @@ export default function Main() {
                     <Stack.Screen
                         name={'Driver'}
                         component={DriverScreen}
-                        options={{ title: '' }}
+                        options={{ title: 'Drivers' }}
                     />
                     <Stack.Screen
                         name={'CreateDriver'}
                         component={CreateDriverScreen}
-                        options={{ title: '' }}
+                        options={{ title: 'Add Driver' }}
                     />
                     <Stack.Screen
                         name={'Schedule'}

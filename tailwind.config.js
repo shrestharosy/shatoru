@@ -8,6 +8,7 @@ module.exports = {
                 lightYellow: '#E4AB50',
                 lightGray: '#FAFAFA',
                 main: '#FFCB05',
+                warning: '#F04135',
             },
         },
     },
