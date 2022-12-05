@@ -7,4 +7,5 @@ export const IMAGE = {
     ADD: require('./add.png'),
     DRIVER: require('./driver.png'),
     BUS: require('./bus.png'),
+    STOPS: require('./stops.png'),
 };

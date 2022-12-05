@@ -3,18 +3,18 @@ import { View, Text, Image, Pressable } from 'react-native';
 import tw from 'src/styles/tailwind';
 
 interface ICardProps {
-    image: any;
-    name: string;
+    name?: string;
+    image?: any;
     style?: string;
-    navigation: any;
-    route: string;
+    navigation?: any;
+    route?: string;
 }
 
 export default function ComponentCard(props: ICardProps) {
     const { image, name, style, navigation, route } = props;
     return (
         <Pressable onPress={() => navigation.navigate(route)}>
-            <View style={tw`${style} bg-white rounded-xl h-30 w-30 p-2`}>
+            <View style={tw`${style} rounded-xl h-30 w-30 p-2`}>
                 <View style={tw`relative`}>
                     <Image
                         source={image}

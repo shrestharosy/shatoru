@@ -8,6 +8,8 @@ type IRouteList = {
     ForgotPassword: undefined;
     Shuttle: undefined;
     CreateShuttle: undefined;
+    StopList: undefined;
+    CreateStop: undefined;
 };
 
 export interface IRouteProps extends NativeStackScreenProps<IRouteList> {}

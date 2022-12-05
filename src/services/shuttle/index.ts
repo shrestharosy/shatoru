@@ -9,6 +9,19 @@ const fetchStops = async () => {
     return response.data;
 };
 
+const createStop = async (name: string, abbreviation: string) => {
+    const response: AxiosResponse<Array<IStop>> = await axiosInstance.post(
+        `/stops/`,
+        { name, abbr: abbreviation }
+    );
+    return response.data;
+};
+
+const deleteStop = async (id: string) => {
+    const response = await axiosInstance.delete(`/stops/${id}/`);
+    return response.data;
+};
+
 const fetchShuttles = async () => {
     const response: AxiosResponse<Array<IShuttleResponse>> =
         await axiosInstance.get(`/shuttles/schedules/`);
@@ -30,4 +43,6 @@ export const shuttleService = {
     createShuttle,
     fetchShuttles,
     deleteShuttle,
+    createStop,
+    deleteStop,
 };
