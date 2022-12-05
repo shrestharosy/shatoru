@@ -1,11 +1,13 @@
 import { Card } from '@rneui/themed';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Pressable, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import StopRow from 'src/components/Shuttle/StopRow';
+import { AuthContext } from 'src/context/auth_context';
 import withProtectedScreen from 'src/libs/hoc/auth_wrapper';
 import { IRouteProps } from 'src/libs/routes';
 import { shuttleService } from 'src/services/shuttle';
 import { IStop } from 'src/services/shuttle/shuttle.type';
+import { RoleEnum } from 'src/services/user/user.type';
 import tw from 'src/styles/tailwind';
 
 interface IStopProps extends IRouteProps {}
@@ -14,6 +16,8 @@ const StopList = ({ navigation }: IStopProps) => {
     const [isLoading, setIsLoading] = useState(false);
 
     const [stopsList, setStopsList] = useState<Array<IStop>>([]);
+
+    const { user } = useContext(AuthContext);
 
     useEffect(() => {
         getStops();
@@ -44,15 +48,21 @@ const StopList = ({ navigation }: IStopProps) => {
     return (
         <SafeAreaView>
             <Card>
-                <Card.Title style={tw`m-0 mb-2`}>
-                    <Pressable
-                        style={tw`bg-main p-2 rounded-md`}
-                        onPress={() => navigation.navigate('CreateDriver')}
-                    >
-                        <Text style={tw`text-white`}>+ Add Stop</Text>
-                    </Pressable>
-                </Card.Title>
-                <Card.Divider />
+                {user && user.role === RoleEnum.ADMIN && (
+                    <>
+                        <Card.Title style={tw`m-0 mb-2`}>
+                            <Pressable
+                                style={tw`bg-main p-2 rounded-md`}
+                                onPress={() =>
+                                    navigation.navigate('CreateStop')
+                                }
+                            >
+                                <Text style={tw`text-white`}>+ Add Stop</Text>
+                            </Pressable>
+                        </Card.Title>
+                        <Card.Divider />
+                    </>
+                )}
                 {isLoading && <Text>Loading...</Text>}
                 {!isLoading &&
                     stopsList.length > 0 &&
@@ -60,6 +70,7 @@ const StopList = ({ navigation }: IStopProps) => {
                         <StopRow
                             key={stop.id}
                             stop={stop}
+                            role={user?.role ?? null}
                             onDelete={onDelete}
                         />
                     ))}

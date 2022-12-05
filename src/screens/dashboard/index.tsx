@@ -39,19 +39,18 @@ const Dashboard = ({ navigation }: IDashboard) => {
                                 style="bg-white"
                             />
                         </View>
-
-                        <View style={tw`flex flex-row justify-around mt-4`}>
-                            <ComponentCard
-                                navigation={navigation}
-                                image={IMAGE.DRIVER}
-                                name="Stops"
-                                route="StopList"
-                                style="ml-4 bg-white"
-                            />
-                            <ComponentCard style={'bg-gray'} />
-                        </View>
                     </>
                 )}
+                <View style={tw`flex flex-row justify-around mt-4`}>
+                    <ComponentCard
+                        navigation={navigation}
+                        image={IMAGE.STOPS}
+                        name="Stops"
+                        route="StopList"
+                        style="ml-4 bg-white"
+                    />
+                    <ComponentCard style={'bg-gray'} />
+                </View>
             </View>
         </ComponentWrapper>
     );
