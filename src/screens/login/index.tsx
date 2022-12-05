@@ -25,9 +25,9 @@ interface ILoginFormValues {
 interface ILoginProps extends IRouteProps {}
 
 export default function Login(props: ILoginProps) {
-    const {
-        navigation: { navigate },
-    } = props;
+    // const {
+    //     navigation: { navigate },
+    // } = props;
 
     const { login } = useContext(AuthContext);
 
@@ -92,7 +92,7 @@ export default function Login(props: ILoginProps) {
                         />
                         <TouchableOpacity
                             style={{ alignItems: 'flex-end' }}
-                            onPress={() => navigate('ForgotPassword')}
+                            // onPress={() => navigate('ForgotPassword')}
                         >
                             <Text style={tw`mb-3 text-lightYellow`}>
                                 Forgot password?
