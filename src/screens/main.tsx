@@ -1,19 +1,33 @@
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import React, { useContext } from 'react';
-import { AuthContext } from 'src/context/auth_context';
+import {
+    createNativeStackNavigator,
+    NativeStackNavigationOptions,
+} from '@react-navigation/native-stack';
+import React from 'react';
+import ComponentLeftHeader from 'src/components/component-header/componentLeftHeader';
+import ComponentRightHeader from 'src/components/component-header/componentRightHeader';
 import IRouteList from 'src/libs/routes';
 import Dashboard from './dashboard';
 import DriverScreen from './driver';
-import LoginScreen from './login';
-import ScheduleScreen from './schedule';
 import CreateDriverScreen from './driver/create';
 import ForgotPassword from './forgotPassword';
+import LoginScreen from './login';
+import ScheduleScreen from './schedule';
 
 const Stack = createNativeStackNavigator<IRouteList>();
 
+interface IProps extends NativeStackNavigationOptions {}
+
+const headerDetail: IProps = {
+    title: '',
+    // headerBackground: () => '#FFCB05',
+    headerLeft: () => <ComponentLeftHeader />,
+    headerRight: () => <ComponentRightHeader />,
+};
+
 export default function Main() {
-    const { isLoggedIn } = useContext(AuthContext);
+    // const { isLoggedIn } = useContext(AuthContext);
+    const [isLoggedIn, setIsLoggedIn] = React.useState(true);
 
     return (
         <NavigationContainer>
@@ -22,7 +36,7 @@ export default function Main() {
                     <Stack.Screen
                         name={'Dashboard'}
                         component={Dashboard}
-                        options={{ title: '' }}
+                        options={headerDetail}
                     />
                     <Stack.Screen
                         name={'Driver'}
@@ -45,7 +59,7 @@ export default function Main() {
                     <Stack.Screen
                         name={'Login'}
                         component={LoginScreen}
-                        options={{ title: '', headerShown: false }}
+                        options={{ headerShown: false }}
                     />
                     <Stack.Screen
                         name={'ForgotPassword'}

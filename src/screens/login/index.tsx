@@ -15,6 +15,7 @@ import { AuthContext } from 'src/context/auth_context';
 import loginSchema from 'src/libs/validation-schema/login_schema';
 import { IRouteProps } from 'src/libs/routes';
 import { IMAGE } from 'src/images';
+// import Loader from 'src/components/loader';
 
 interface ILoginFormValues {
     username: string;
@@ -24,9 +25,9 @@ interface ILoginFormValues {
 interface ILoginProps extends IRouteProps {}
 
 export default function Login(props: ILoginProps) {
-    const {
-        navigation: { navigate },
-    } = props;
+    // const {
+    //     navigation: { navigate },
+    // } = props;
 
     const { login } = useContext(AuthContext);
 
@@ -53,7 +54,7 @@ export default function Login(props: ILoginProps) {
 
     return (
         <View style={tw`py-12 px-2`}>
-            <View style={tw`py-16 px-8 bg-lightGray rounded-xl w-full`}>
+            <View style={tw`px-8 bg-lightGray rounded-xl w-full`}>
                 <Image source={IMAGE.SHUTTLE} style={tw`h-32 w-full`} />
                 <Text
                     style={tw`text-brownRed text-base text-center mt-2 font-bold`}
@@ -64,7 +65,7 @@ export default function Login(props: ILoginProps) {
             <View style={tw`mt-4`}>
                 <Text style={tw`font-bold text-2xl`}>Welcome!</Text>
                 <Text>Log in to your account</Text>
-                <View style={tw`mt-12`}>
+                <View style={tw`mt-8`}>
                     <FormProvider {...methods}>
                         <Controller
                             name="username"
@@ -91,9 +92,9 @@ export default function Login(props: ILoginProps) {
                         />
                         <TouchableOpacity
                             style={{ alignItems: 'flex-end' }}
-                            onPress={() => navigate('ForgotPassword')}
+                            // onPress={() => navigate('ForgotPassword')}
                         >
-                            <Text style={tw`mb-4 text-lightYellow`}>
+                            <Text style={tw`mb-3 text-lightYellow`}>
                                 Forgot password?
                             </Text>
                         </TouchableOpacity>
@@ -103,9 +104,13 @@ export default function Login(props: ILoginProps) {
                         style={tw`bg-main p-2 rounded-md`}
                         disabled={isLoading}
                     >
-                        <Text style={tw`text-center text-lg tracking-wide`}>
-                            {isLoading ? 'Loading...' : 'LOG IN '}
-                        </Text>
+                        {isLoading ? (
+                            <Text>Loading...</Text>
+                        ) : (
+                            <Text style={tw`text-center text-lg tracking-wide`}>
+                                LOG IN
+                            </Text>
+                        )}
                     </Pressable>
                 </View>
             </View>

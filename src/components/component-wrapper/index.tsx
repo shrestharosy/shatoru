@@ -8,7 +8,7 @@ interface IComponentWrapper {
 export default function ComponentWrapper(props: IComponentWrapper) {
     return (
         <SafeAreaView>
-            <View style={tw`py-12 px-4`}>{props.children}</View>
+            <View style={tw`py-2 px-4`}>{props.children}</View>
         </SafeAreaView>
     );
 }
