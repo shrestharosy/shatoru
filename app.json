@@ -16,7 +16,8 @@
         },
         "assetBundlePatterns": ["**/*"],
         "ios": {
-            "supportsTablet": true
+            "supportsTablet": true,
+            "bundleIdentifier": "shatory-ios"
         },
         "android": {
             "adaptiveIcon": {

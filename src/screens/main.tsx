@@ -6,6 +6,7 @@ import {
 import React, { useContext } from 'react';
 import ComponentLeftHeader from 'src/components/component-header/componentLeftHeader';
 import ComponentRightHeader from 'src/components/component-header/componentRightHeader';
+import ScheduleList from 'src/screens/shuttle/ScheduleList';
 import { AuthContext } from 'src/context/auth_context';
 import IRouteList from 'src/libs/routes';
 import Dashboard from './dashboard';
@@ -60,6 +61,12 @@ export default function Main() {
                         name={'CreateShuttle'}
                         component={CreateShuttleScreen}
                         options={{ title: 'Create Shuttle' }}
+                    />
+                    <Stack.Screen
+                        name={'ScheduleList'}
+                        component={ScheduleList}
+                        options={{ title: 'Schedules' }}
+                        getId={({ params }) => params.shuttleId.toString()}
                     />
                     <Stack.Screen
                         name={'StopList'}

@@ -1,6 +1,11 @@
 import { AxiosResponse } from 'axios';
 import axiosInstance from 'src/libs/util/axios';
-import { IStop, IShuttlePayload, IShuttleResponse } from './shuttle.type';
+import {
+    IStop,
+    IShuttleSchedulePayload,
+    IShuttleResponse,
+    IScheduleResponse,
+} from './shuttle.type';
 
 const fetchStops = async () => {
     const response: AxiosResponse<Array<IStop>> = await axiosInstance.get(
@@ -24,17 +29,24 @@ const deleteStop = async (id: string) => {
 
 const fetchShuttles = async () => {
     const response: AxiosResponse<Array<IShuttleResponse>> =
-        await axiosInstance.get(`/shuttles/schedules/`);
+        await axiosInstance.get(`/shuttles/`);
     return response.data;
 };
 
-const createShuttle = async (payload: IShuttlePayload) => {
+const fetchSchedule = async (id) => {
+    const response: AxiosResponse<IScheduleResponse> = await axiosInstance.get(
+        `/shuttles/schedules/${id}/`
+    );
+    return response.data;
+};
+
+const createShuttle = async (payload: IShuttleSchedulePayload) => {
     const response = await axiosInstance.post(`/shuttles/schedules/`, payload);
     return response.data;
 };
 
 const deleteShuttle = async (id: number) => {
-    const response = await axiosInstance.delete(`/shuttles/schedules/${id}/`);
+    const response = await axiosInstance.delete(`/shuttles/${id}/`);
     return response.data;
 };
 
@@ -45,4 +57,5 @@ export const shuttleService = {
     deleteShuttle,
     createStop,
     deleteStop,
+    fetchSchedule,
 };

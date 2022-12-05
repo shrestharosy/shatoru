@@ -1,7 +1,10 @@
 import { Button, ListItem, Text } from '@rneui/themed';
 import React from 'react';
+import { View, Pressable } from 'react-native';
+import { IRouteProps } from 'src/libs/routes';
 import { parseTime } from 'src/libs/util/datetime';
 import { IShuttleResponse } from 'src/services/shuttle/shuttle.type';
+import { useNavigation } from '@react-navigation/native';
 
 interface IShuttleRowProps {
     shuttle: IShuttleResponse;
@@ -10,6 +13,9 @@ interface IShuttleRowProps {
 
 const ShuttleRow = (props: IShuttleRowProps) => {
     const { shuttle, onDelete } = props;
+
+    const navigation = useNavigation<any>();
+
     return (
         <>
             <ListItem.Swipeable
@@ -28,13 +34,18 @@ const ShuttleRow = (props: IShuttleRowProps) => {
                     />
                 )}
             >
-                <ListItem.Content>
-                    <Text>{shuttle.shuttle}</Text>
-                    <Text>
-                        {parseTime(shuttle.start_time)} -{' '}
-                        {parseTime(shuttle.end_time)}
-                    </Text>
-                </ListItem.Content>
+                <Pressable
+                    onPress={() =>
+                        navigation.navigate('ScheduleList', {
+                            shuttleId: shuttle.id,
+                            scheduleIds: JSON.stringify(shuttle.schedules),
+                        })
+                    }
+                >
+                    <ListItem.Content>
+                        <Text>{shuttle.name}</Text>
+                    </ListItem.Content>
+                </Pressable>
                 <ListItem.Chevron />
             </ListItem.Swipeable>
         </>

@@ -49,7 +49,7 @@ const Dashboard = ({ navigation }: IDashboard) => {
                         route="StopList"
                         style="ml-4 bg-white"
                     />
-                    <ComponentCard style={'bg-gray'} />
+                    <ComponentCard style={''} />
                 </View>
             </View>
         </ComponentWrapper>

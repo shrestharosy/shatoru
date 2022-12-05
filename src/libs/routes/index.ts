@@ -8,10 +8,15 @@ type IRouteList = {
     ForgotPassword: undefined;
     Shuttle: undefined;
     CreateShuttle: undefined;
+    ScheduleList: ScheduleListParams;
     StopList: undefined;
     CreateStop: undefined;
 };
 
-export interface IRouteProps extends NativeStackScreenProps<IRouteList> {}
+type ScheduleListParams = {
+    shuttleId: number;
+};
+
+export interface IRouteProps extends NativeStackScreenProps<IRouteList, any> {}
 
 export default IRouteList;
