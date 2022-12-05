@@ -21,25 +21,37 @@ const Dashboard = ({ navigation }: IDashboard) => {
             <View style={tw`relative h-full`}>
                 <DrawerRight />
                 {/* <DrawerLeft navigation={navigation} /> */}
-                <View style={tw`flex flex-row justify-around`}>
-                    {user && user.role === RoleEnum.ADMIN && (
-                        <>
+                {user && user.role === RoleEnum.ADMIN && (
+                    <>
+                        <View style={tw`flex flex-row justify-around`}>
                             <ComponentCard
                                 navigation={navigation}
                                 image={IMAGE.DRIVER}
                                 name="Drivers"
                                 route="Driver"
-                                style="ml-4"
+                                style="ml-4 bg-white"
                             />
                             <ComponentCard
                                 image={IMAGE.BUS}
                                 name="Shuttles"
                                 navigation={navigation}
                                 route="Shuttle"
+                                style="bg-white"
                             />
-                        </>
-                    )}
-                </View>
+                        </View>
+
+                        <View style={tw`flex flex-row justify-around mt-4`}>
+                            <ComponentCard
+                                navigation={navigation}
+                                image={IMAGE.DRIVER}
+                                name="Stops"
+                                route="StopList"
+                                style="ml-4 bg-white"
+                            />
+                            <ComponentCard style={'bg-gray'} />
+                        </View>
+                    </>
+                )}
             </View>
         </ComponentWrapper>
     );

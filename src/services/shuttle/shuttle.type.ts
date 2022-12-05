@@ -1,7 +1,7 @@
 export interface IStop {
     id: string;
     name: string;
-    abbreviation: string;
+    abbr: string;
 }
 
 export interface IOption {

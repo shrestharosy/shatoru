@@ -15,6 +15,7 @@ import ForgotPassword from './forgotPassword';
 import LoginScreen from './login';
 import Shuttle from './shuttle';
 import CreateShuttleScreen from './shuttle/create';
+import StopListScreen from './stop';
 
 const Stack = createNativeStackNavigator<IRouteList>();
 
@@ -58,6 +59,11 @@ export default function Main() {
                         name={'CreateShuttle'}
                         component={CreateShuttleScreen}
                         options={{ title: 'Create Shuttle' }}
+                    />
+                    <Stack.Screen
+                        name={'StopList'}
+                        component={StopListScreen}
+                        options={{ title: 'Stops' }}
                     />
                 </Stack.Navigator>
             ) : (
