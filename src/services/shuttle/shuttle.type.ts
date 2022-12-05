@@ -9,12 +9,16 @@ export interface IOption {
     value: string;
 }
 
-export interface ICreateShuttlePayload {
+export interface IShuttlePayload {
     shuttle: string;
     start_time: Date;
     end_time: Date;
     stops: IStopJSON;
     days: Array<string>;
+}
+
+export interface IShuttleResponse extends IShuttlePayload {
+    id: number;
 }
 
 export interface IStopJSON {

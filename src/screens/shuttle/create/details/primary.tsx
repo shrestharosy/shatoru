@@ -26,7 +26,7 @@ const PrimaryDetails = () => {
                         <CustomInput
                             {...field}
                             label="Shuttle Name"
-                            placeholder="blue shuttle"
+                            placeholder="Blue shuttle"
                         />
                     )}
                 />

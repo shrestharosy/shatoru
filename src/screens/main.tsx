@@ -38,12 +38,12 @@ export default function Main() {
                     <Stack.Screen
                         name={'Shuttle'}
                         component={Shuttle}
-                        options={{ title: '' }}
+                        options={{ title: 'Shuttle' }}
                     />
                     <Stack.Screen
                         name={'CreateShuttle'}
                         component={CreateShuttleScreen}
-                        options={{ title: '' }}
+                        options={{ title: 'Create Shuttle' }}
                     />
                 </Stack.Navigator>
             ) : (

@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
 import {
     FormProvider,
@@ -9,6 +10,7 @@ import {
 import { useStep } from 'react-hooks-helper';
 import { View, Text, Pressable, ScrollView } from 'react-native';
 import Loader from 'src/components/loader';
+import IRouteList, { IRouteProps } from 'src/libs/routes';
 import { shuttleService } from 'src/services/shuttle';
 import { IStopJSON } from 'src/services/shuttle/shuttle.type';
 import tw from 'src/styles/tailwind';
@@ -42,7 +44,6 @@ interface IStopDetails {
 }
 
 export const defaultValues = {
-    name: 'Blue Shuttle',
     stops: [],
     startTime: new Date(),
     endTime: new Date(),
@@ -56,10 +57,11 @@ const MultiStepForm = () => {
 
     const {
         step: { id },
-        navigation,
+        navigation: { next, previous },
     } = useStep({ initialStep: 0, steps });
 
-    const { next, previous } = navigation;
+    // TODO : improve code for annotaing use navigation
+    const navigation = useNavigation<any>();
 
     const getForm = () => {
         switch (id) {
@@ -99,8 +101,10 @@ const MultiStepForm = () => {
                 stops: formattedStops,
             });
             alert('Shuttle created successfully');
+            navigation.navigate('Shuttle');
         } catch (error) {
             console.log('error');
+            alert(error.message ?? 'Error while creating shuttle');
         } finally {
             setIsLoading(false);
         }
@@ -112,7 +116,7 @@ const MultiStepForm = () => {
 
     return (
         <ScrollView>
-            <View style={tw`py-5 px-2`}>
+            <View style={tw`px-2`}>
                 <FormProvider {...methods}>{getForm()}</FormProvider>
             </View>
             <View style={tw`flex flex-row justify-between p-2`}>
