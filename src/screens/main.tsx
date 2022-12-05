@@ -3,16 +3,18 @@ import {
     createNativeStackNavigator,
     NativeStackNavigationOptions,
 } from '@react-navigation/native-stack';
-import React from 'react';
+import React, { useContext } from 'react';
 import ComponentLeftHeader from 'src/components/component-header/componentLeftHeader';
 import ComponentRightHeader from 'src/components/component-header/componentRightHeader';
+import { AuthContext } from 'src/context/auth_context';
 import IRouteList from 'src/libs/routes';
 import Dashboard from './dashboard';
 import DriverScreen from './driver';
 import CreateDriverScreen from './driver/create';
 import ForgotPassword from './forgotPassword';
 import LoginScreen from './login';
-import ScheduleScreen from './schedule';
+import Shuttle from './shuttle';
+import CreateShuttleScreen from './shuttle/create';
 
 const Stack = createNativeStackNavigator<IRouteList>();
 
@@ -26,8 +28,7 @@ const headerDetail: IProps = {
 };
 
 export default function Main() {
-    // const { isLoggedIn } = useContext(AuthContext);
-    const [isLoggedIn, setIsLoggedIn] = React.useState(true);
+    const { isLoggedIn } = useContext(AuthContext);
 
     return (
         <NavigationContainer>
@@ -49,9 +50,14 @@ export default function Main() {
                         options={{ title: 'Add Driver' }}
                     />
                     <Stack.Screen
-                        name={'Schedule'}
-                        component={ScheduleScreen}
-                        options={{ title: '' }}
+                        name={'Shuttle'}
+                        component={Shuttle}
+                        options={{ title: 'Shuttle' }}
+                    />
+                    <Stack.Screen
+                        name={'CreateShuttle'}
+                        component={CreateShuttleScreen}
+                        options={{ title: 'Create Shuttle' }}
                     />
                 </Stack.Navigator>
             ) : (

@@ -21,13 +21,13 @@ export default function DrawerRight() {
                 keyExtractor={(item) => item.id}
                 renderItem={({ item }) => {
                     return (
-                        <View style={tw`bg-white p-2 border-b-2`}>
+                        <View style={tw`bg-white p-2`}>
                             <Pressable
                                 onPress={() =>
                                     item?.name === 'Log Out' && logout()
                                 }
                             >
-                                <Text style={tw`text-base`}>{item?.name}</Text>
+                                <Text style={tw`text-sm`}>{item?.name}</Text>
                             </Pressable>
                         </View>
                     );

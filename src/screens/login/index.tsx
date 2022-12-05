@@ -15,7 +15,7 @@ import { AuthContext } from 'src/context/auth_context';
 import loginSchema from 'src/libs/validation-schema/login_schema';
 import { IRouteProps } from 'src/libs/routes';
 import { IMAGE } from 'src/images';
-// import Loader from 'src/components/loader';
+import Loader from 'src/components/loader';
 
 interface ILoginFormValues {
     username: string;
@@ -59,7 +59,7 @@ export default function Login(props: ILoginProps) {
                 <Text
                     style={tw`text-brownRed text-base text-center mt-2 font-bold`}
                 >
-                    UMD Shuttle Service
+                    Shatoru
                 </Text>
             </View>
             <View style={tw`mt-4`}>
@@ -105,10 +105,10 @@ export default function Login(props: ILoginProps) {
                         disabled={isLoading}
                     >
                         {isLoading ? (
-                            <Text>Loading...</Text>
+                            <Loader />
                         ) : (
                             <Text style={tw`text-center text-lg tracking-wide`}>
-                                LOG IN
+                                Log In
                             </Text>
                         )}
                     </Pressable>
