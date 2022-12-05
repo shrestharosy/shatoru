@@ -1,7 +1,10 @@
+import { AxiosResponse } from 'axios';
 import axiosInstance from 'src/libs/util/axios';
+import { ICreateDriverPayload, IDriverResponse } from './driver.type';
 
 const fetchdrivers = async () => {
-    const response = await axiosInstance.get(`character`);
+    const response: AxiosResponse<Array<IDriverResponse>> =
+        await axiosInstance.get(`/user/driver/list/`);
     return response.data;
 };
 
@@ -15,7 +18,13 @@ const createDriver = async (payload: ICreateDriverPayload) => {
     return response.data;
 };
 
+const deleteDriver = async (id: number) => {
+    const response = await axiosInstance.delete(`/user/driver/${id}/delete/`);
+    return response.data;
+};
+
 export const driverService = {
     fetchdrivers,
     createDriver,
+    deleteDriver,
 };
