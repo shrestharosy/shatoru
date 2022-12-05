@@ -38,7 +38,7 @@ export default function ForgotPassword() {
             alert('Please check your email for a 6-digit code');
         } catch (error: any) {
             console.log(error);
-            alert(error.message);
+            alert(error.message ?? 'Please try again');
         } finally {
             setIsLoading(false);
         }
@@ -52,7 +52,7 @@ export default function ForgotPassword() {
         <View style={tw`py-12 px-2`}>
             <View style={tw`pt-2`}>
                 <Image style={tw`mx-auto`} source={IMAGE.QUESTION} />
-                <Text style={tw`text-center text-4xl`}>Forgot Password</Text>
+                {/* <Text style={tw`text-center`}>Forgot Password</Text> */}
 
                 <View style={tw`mt-10`}>
                     <FormProvider {...methods}>
@@ -68,7 +68,7 @@ export default function ForgotPassword() {
                             )}
                         />
                         <TouchableOpacity
-                            style={tw`w-full rounded-md bg-lightYellow py-3`}
+                            style={tw`w-full rounded-md bg-main py-3`}
                             onPress={methods.handleSubmit(onSubmit, onError)}
                             disabled={isLoading}
                         >

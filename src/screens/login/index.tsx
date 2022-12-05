@@ -3,6 +3,7 @@ import { useContext, useState } from 'react';
 import { Image, Pressable, Text, TouchableOpacity, View } from 'react-native';
 import tw from 'src/styles/tailwind';
 
+import { useNavigation } from '@react-navigation/native';
 import {
     Controller,
     FormProvider,
@@ -11,23 +12,25 @@ import {
     useForm,
 } from 'react-hook-form';
 import { CustomInput } from 'src/components/form/CustomTextInput';
-import { AuthContext } from 'src/context/auth_context';
-import loginSchema from 'src/libs/validation-schema/login_schema';
-import { IRouteProps } from 'src/libs/routes';
-import { IMAGE } from 'src/images';
 import Loader from 'src/components/loader';
+import { AuthContext } from 'src/context/auth_context';
+import { IMAGE } from 'src/images';
+import loginSchema from 'src/libs/validation-schema/login_schema';
 
 interface ILoginFormValues {
     username: string;
     password: string;
 }
 
-interface ILoginProps extends IRouteProps {}
+interface ILoginProps {}
 
 export default function Login(props: ILoginProps) {
     // const {
     //     navigation: { navigate },
-    // } = props;
+    // } = props
+
+    // TODO : improve code for annotaing use navigation
+    const navigation = useNavigation<any>();
 
     const { login } = useContext(AuthContext);
 
@@ -92,7 +95,9 @@ export default function Login(props: ILoginProps) {
                         />
                         <TouchableOpacity
                             style={{ alignItems: 'flex-end' }}
-                            // onPress={() => navigate('ForgotPassword')}
+                            onPress={() =>
+                                navigation.navigate('ForgotPassword')
+                            }
                         >
                             <Text style={tw`mb-3 text-lightYellow`}>
                                 Forgot password?

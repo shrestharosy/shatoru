@@ -70,7 +70,7 @@ export default function Main() {
                     <Stack.Screen
                         name={'ForgotPassword'}
                         component={ForgotPassword}
-                        options={{ title: '' }}
+                        options={{ title: 'Forgot Password' }}
                     />
                 </Stack.Navigator>
             )}
