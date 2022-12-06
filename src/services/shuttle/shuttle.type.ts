@@ -13,8 +13,8 @@ export interface IShuttleSchedulePayload {
     shuttle: string;
     start_time: Date;
     end_time: Date;
-    // stops: IStopJSON;
-    schedule: Array<IScheduleObject>;
+    stops: IStopJSON;
+    schedule?: Array<IScheduleObject>;
     days: Array<string>;
 }
 

@@ -1,21 +1,23 @@
 import { BASE_URL } from '@env';
 
-interface IAppEnvConfig {
-    BASE_URL: string;
+class Config {
+    constructor() {}
+
+    start() {
+        console.log('App has started');
+    }
+    update() {
+        console.log('App has updated');
+    }
+
+    getKeys() {
+        console.log(BASE_URL);
+        return BASE_URL ?? '';
+    }
 }
 
-const APP_CONFIG: IAppEnvConfig = {
-    BASE_URL: BASE_URL ?? '',
-};
+const configInstance = new Config();
 
-console.log(`BASE_URL : ${BASE_URL}`);
+Object.freeze(configInstance);
 
-interface IConfigValue {
-    APP: IAppEnvConfig;
-}
-
-const Config: IConfigValue = {
-    APP: APP_CONFIG,
-};
-
-export default Config;
+export default configInstance;

@@ -24,7 +24,7 @@ interface ILoginFormValues {
 
 interface ILoginProps {}
 
-export default function Login(props: ILoginProps) {
+function Login(props: ILoginProps) {
     // const {
     //     navigation: { navigate },
     // } = props
@@ -122,3 +122,5 @@ export default function Login(props: ILoginProps) {
         </View>
     );
 }
+
+export default Login;

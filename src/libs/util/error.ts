@@ -1,6 +1,4 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AxiosResponse } from 'axios';
-import { STORAGE } from '../constants/storage';
 
 interface IAxiosErrorData {
     status: string;

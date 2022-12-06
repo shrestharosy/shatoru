@@ -1,6 +1,6 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createContext, ReactElement, useEffect, useState } from 'react';
 import { STORAGE } from 'src/libs/constants/storage';
+import storageUtilityInstance from 'src/libs/util/storage';
 import { authService } from 'src/services/auth';
 import { IUser } from 'src/services/user/user.type';
 
@@ -11,15 +11,14 @@ interface IAuthContextValues {
     login: (payload: ILogin) => void;
     logout: () => void;
 }
+interface IAuthProviderProps {
+    children: ReactElement;
+}
 
 export const AuthContext = createContext<IAuthContextValues>({
     isLoading: null,
     isLoggedIn: false,
 } as IAuthContextValues);
-
-interface IAuthProviderProps {
-    children: ReactElement;
-}
 
 export const AuthProvider = ({ children }: IAuthProviderProps) => {
     const [isLoading, setIsLoading] = useState(true);
@@ -35,8 +34,8 @@ export const AuthProvider = ({ children }: IAuthProviderProps) => {
         try {
             const response = await authService.login(payload);
             const { token, ...rest } = response;
-            AsyncStorage.setItem(STORAGE.TOKEN, token);
-            AsyncStorage.setItem(STORAGE.USER, JSON.stringify(rest));
+            storageUtilityInstance.setItem(STORAGE.TOKEN, token);
+            storageUtilityInstance.setItem(STORAGE.USER, JSON.stringify(rest));
             setUser(user);
             setToken(token);
             setAuthStatus();
@@ -48,8 +47,8 @@ export const AuthProvider = ({ children }: IAuthProviderProps) => {
     };
 
     const logout = () => {
-        AsyncStorage.removeItem(STORAGE.TOKEN);
-        AsyncStorage.removeItem(STORAGE.USER);
+        storageUtilityInstance.removeItem(STORAGE.TOKEN);
+        storageUtilityInstance.removeItem(STORAGE.USER);
         setToken(null);
         setAuthStatus();
     };
@@ -57,8 +56,12 @@ export const AuthProvider = ({ children }: IAuthProviderProps) => {
     const setAuthStatus = async () => {
         setIsLoading(true);
         try {
-            const activeToken = await AsyncStorage.getItem(STORAGE.TOKEN);
-            const activeUser = await AsyncStorage.getItem(STORAGE.USER);
+            const activeToken = await storageUtilityInstance.getItem(
+                STORAGE.TOKEN
+            );
+            const activeUser = await storageUtilityInstance.getItem(
+                STORAGE.USER
+            );
             if (!activeToken || !activeUser) {
                 setIsLoggedIn(false);
             } else {

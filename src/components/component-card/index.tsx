@@ -13,7 +13,7 @@ interface ICardProps {
 export default function ComponentCard(props: ICardProps) {
     const { image, name, style, navigation, route } = props;
     return (
-        <Pressable onPress={() => navigation.navigate(route)}>
+        <Pressable onPress={() => navigation && navigation.navigate(route)}>
             <View style={tw`${style} rounded-xl h-30 w-30 p-2`}>
                 <View style={tw`relative`}>
                     <Image
