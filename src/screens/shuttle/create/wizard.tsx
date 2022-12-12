@@ -95,8 +95,8 @@ const MultiStepForm = () => {
             });
             await shuttleService.createShuttle({
                 shuttle,
-                start_time,
-                end_time,
+                start_time: start_time.toLocaleTimeString(),
+                end_time: end_time.toLocaleTimeString(),
                 days,
                 stops: formattedStops,
             });

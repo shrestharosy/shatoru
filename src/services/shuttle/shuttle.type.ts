@@ -11,8 +11,8 @@ export interface IOption {
 
 export interface IShuttleSchedulePayload {
     shuttle: string;
-    start_time: Date;
-    end_time: Date;
+    start_time: string;
+    end_time: string;
     stops: IStopJSON;
     schedule?: Array<IScheduleObject>;
     days: Array<string>;
