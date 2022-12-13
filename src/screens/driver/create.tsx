@@ -7,7 +7,7 @@ import {
     SubmitHandler,
     useForm,
 } from 'react-hook-form';
-import { Pressable, Text, View } from 'react-native';
+import { Pressable, ScrollView, Text, View } from 'react-native';
 import { CustomInput } from 'src/components/form/CustomTextInput';
 import withProtectedScreen from 'src/libs/hoc/auth_wrapper';
 import { IRouteProps } from 'src/libs/routes';
@@ -45,7 +45,10 @@ const CreateDriver = ({ navigation }: IDriver) => {
     };
 
     return (
-        <View style={tw`py-12 px-4`}>
+        <ScrollView
+            style={tw`pt-4 px-4`}
+            automaticallyAdjustKeyboardInsets={true}
+        >
             <>
                 <FormProvider {...methods}>
                     <Controller
@@ -99,11 +102,11 @@ const CreateDriver = ({ navigation }: IDriver) => {
                 style={tw`bg-main p-2 rounded-md`}
                 onPress={methods.handleSubmit(onSubmit, onError)}
             >
-                <Text style={tw`text-center text-lg tracking-wide`}>
-                    CREATE
+                <Text style={tw`text-center text-white text-lg tracking-wide`}>
+                    Create
                 </Text>
             </Pressable>
-        </View>
+        </ScrollView>
     );
 };
 
