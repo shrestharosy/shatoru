@@ -20,28 +20,7 @@ const Dashboard = ({ navigation }: IDashboard) => {
         <ComponentWrapper>
             <View style={tw`relative h-full`}>
                 <DrawerRight />
-                {/* <DrawerLeft navigation={navigation} /> */}
-                {user && user.role === RoleEnum.ADMIN && (
-                    <>
-                        <View style={tw`flex flex-row justify-around`}>
-                            <ComponentCard
-                                navigation={navigation}
-                                image={IMAGE.DRIVER}
-                                name="Drivers"
-                                route="Driver"
-                                style="ml-4 bg-white"
-                            />
-                            <ComponentCard
-                                image={IMAGE.BUS}
-                                name="Shuttles"
-                                navigation={navigation}
-                                route="Shuttle"
-                                style="bg-white"
-                            />
-                        </View>
-                    </>
-                )}
-                <View style={tw`flex flex-row justify-around mt-4`}>
+                <View style={tw`flex flex-row justify-around`}>
                     <ComponentCard
                         navigation={navigation}
                         image={IMAGE.STOPS}
@@ -49,8 +28,30 @@ const Dashboard = ({ navigation }: IDashboard) => {
                         route="StopList"
                         style="ml-4 bg-white"
                     />
-                    <ComponentCard style={''} />
+                    {user && user.role === RoleEnum.ADMIN && (
+                        <ComponentCard
+                            image={IMAGE.BUS}
+                            name="Shuttles"
+                            navigation={navigation}
+                            route="Shuttle"
+                            style="bg-white"
+                        />
+                    )}
                 </View>
+                {user && user.role === RoleEnum.ADMIN && (
+                    <>
+                        <View style={tw`flex flex-row justify-around mt-4`}>
+                            <ComponentCard
+                                navigation={navigation}
+                                image={IMAGE.DRIVER}
+                                name="Drivers"
+                                route="Driver"
+                                style="ml-4 bg-white"
+                            />
+                            <ComponentCard style={''} />
+                        </View>
+                    </>
+                )}
             </View>
         </ComponentWrapper>
     );
