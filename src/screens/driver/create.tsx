@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     Controller,
     FormProvider,
@@ -7,12 +7,18 @@ import {
     SubmitHandler,
     useForm,
 } from 'react-hook-form';
-import { Pressable, ScrollView, Text, View } from 'react-native';
+import { Pressable, ScrollView, Text } from 'react-native';
+import CustomMultiSelect, {
+    DropDownStyleEnum,
+} from 'src/components/form/CustomMultiSelect';
 import { CustomInput } from 'src/components/form/CustomTextInput';
+import { Label } from 'src/components/form/Label';
 import withProtectedScreen from 'src/libs/hoc/auth_wrapper';
 import { IRouteProps } from 'src/libs/routes';
 import createDriverSchema from 'src/libs/validation-schema/create_driver_schema';
 import { driverService } from 'src/services/driver';
+import { shuttleService } from 'src/services/shuttle';
+import { IOption } from 'src/services/shuttle/shuttle.type';
 
 import tw from 'src/styles/tailwind';
 
@@ -23,9 +29,15 @@ interface ICreateDriverFormValues {
     lastName: string;
     email: string;
     username: string;
+    schedule: string;
 }
 
 const CreateDriver = ({ navigation }: IDriver) => {
+    const [shuttlesOption, setShuttlesOption] = useState<Array<IOption>>([]);
+    const [selectedOptions, setSelectedOptions] = React.useState<Array<string>>(
+        []
+    );
+
     const { ...methods } = useForm<ICreateDriverFormValues>({
         resolver: yupResolver(createDriverSchema),
     });
@@ -41,7 +53,24 @@ const CreateDriver = ({ navigation }: IDriver) => {
     };
 
     const onError: SubmitErrorHandler<ICreateDriverFormValues> = (errors) => {
-        // return console.log({ errors });
+        return console.log({ errors });
+    };
+
+    useEffect(() => {
+        getAllSchedules();
+    }, []);
+
+    const getAllSchedules = async () => {
+        try {
+            const response = await shuttleService.fetchSchedules();
+            const shuttleOptions = response.map((shuttle) => ({
+                label: shuttle.shuttle,
+                value: shuttle.id,
+            }));
+            setShuttlesOption(shuttleOptions);
+        } catch (error) {
+            alert('Error while fetching schedules');
+        }
     };
 
     return (
@@ -96,10 +125,33 @@ const CreateDriver = ({ navigation }: IDriver) => {
                             />
                         )}
                     />
+                    <Controller
+                        name="schedule"
+                        control={methods.control}
+                        render={({}) => (
+                            <>
+                                <Label label={'Shuttle'} />
+                                <CustomMultiSelect
+                                    name="schedule"
+                                    options={shuttlesOption}
+                                    isSearchAllowed={false}
+                                    showSelectedOptionsAsTags={true}
+                                    selectedOptions={selectedOptions}
+                                    dropDownStyle={
+                                        DropDownStyleEnum.dropdownAlt
+                                    }
+                                    onChange={(item) => {
+                                        setSelectedOptions(item);
+                                        methods.setValue('schedule', item);
+                                    }}
+                                />
+                            </>
+                        )}
+                    />
                 </FormProvider>
             </>
             <Pressable
-                style={tw`bg-main p-2 rounded-md`}
+                style={tw`bg-main mt-4 p-2 rounded-md`}
                 onPress={methods.handleSubmit(onSubmit, onError)}
             >
                 <Text style={tw`text-center text-white text-lg tracking-wide`}>

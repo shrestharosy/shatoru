@@ -40,6 +40,12 @@ const fetchSchedule = async (id) => {
     return response.data;
 };
 
+const fetchSchedules = async () => {
+    const response: AxiosResponse<Array<IScheduleResponse>> =
+        await axiosInstance.get(`/shuttles/schedules/`);
+    return response.data;
+};
+
 const createShuttle = async (payload: IShuttleSchedulePayload) => {
     const response = await axiosInstance.post(`/shuttles/schedules/`, payload);
     return response.data;
@@ -58,4 +64,5 @@ export const shuttleService = {
     createStop,
     deleteStop,
     fetchSchedule,
+    fetchSchedules,
 };

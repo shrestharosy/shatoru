@@ -16,6 +16,13 @@ interface ICustomMultiSelectProps extends UseControllerProps {
     selectedOptions: Array<string>;
     onChange: (item: any) => void;
     showSelectedOptionsAsTags?: boolean;
+    isSearchAllowed?: boolean;
+    dropDownStyle?: DropDownStyleEnum;
+}
+
+export enum DropDownStyleEnum {
+    dropdown = 'dropdown',
+    dropdownAlt = 'dropdownAlt',
 }
 
 const CustomMultiSelect = (props: ICustomMultiSelectProps) => {
@@ -24,6 +31,8 @@ const CustomMultiSelect = (props: ICustomMultiSelectProps) => {
         options,
         selectedOptions,
         showSelectedOptionsAsTags = false,
+        isSearchAllowed = true,
+        dropDownStyle = DropDownStyleEnum.dropdown,
         onChange,
     } = props;
 
@@ -35,7 +44,11 @@ const CustomMultiSelect = (props: ICustomMultiSelectProps) => {
     return (
         <MultiSelect
             {...field}
-            style={styles.dropdown}
+            style={
+                dropDownStyle === DropDownStyleEnum.dropdown
+                    ? styles.dropdown
+                    : styles.dropdownAlt
+            }
             placeholderStyle={styles.placeholderStyle}
             selectedTextStyle={styles.selectedTextStyle}
             inputSearchStyle={styles.inputSearchStyle}
@@ -45,7 +58,8 @@ const CustomMultiSelect = (props: ICustomMultiSelectProps) => {
             valueField="value"
             placeholder={`${selectedOptions.length} options selected`}
             value={selectedOptions}
-            search
+            search={isSearchAllowed}
+            inside={true}
             searchPlaceholder="Search..."
             onChange={onChange}
             // renderItem={renderDataItem}
@@ -56,7 +70,7 @@ const CustomMultiSelect = (props: ICustomMultiSelectProps) => {
                     return (
                         <TouchableOpacity
                             onPress={() => unSelect && unSelect(item)}
-                            style={tw`flex-row justify-center items-center rounded-2xl bg-white shadow-sm mt-2 mr-2 px-2 py-1`}
+                            style={tw`flex-row justify-center items-center rounded-2xl bg-main shadow-sm mt-2 mr-2 px-2 py-1`}
                         >
                             <Text style={styles.textSelectedStyle}>
                                 {item.label} x
@@ -84,6 +98,12 @@ const styles = StyleSheet.create({
         shadowRadius: 1.41,
 
         elevation: 2,
+    },
+    dropdownAlt: {
+        height: 42,
+        backgroundColor: 'white',
+        borderRadius: 2,
+        padding: 12,
     },
     placeholderStyle: {
         fontSize: 16,
