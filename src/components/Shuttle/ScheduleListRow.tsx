@@ -15,7 +15,7 @@ const ScheduleListRow = (props: IScheduleListRowProps) => {
     const { index, schedule, onDelete } = props;
 
     return (
-        <ScrollView>
+        <View>
             {/* <ListItem.Swipeable
                 rightContent={(reset) => (
                     <Button
@@ -32,24 +32,25 @@ const ScheduleListRow = (props: IScheduleListRowProps) => {
                     />
                 )}
             > */}
-            <ListItem.Content>
-                {/* <Text>Schedule {index}</Text> */}
-                <View style={tw`flex-row justify-between`}>
-                    {/* <Text>{schedule.days.map((day) => day)}</Text> */}
-                    {schedule.days.map((day) => (
-                        <>
-                            <View
-                                style={tw`flex-row justify-center items-center rounded-2xl bg-main shadow-sm mr-2 px-2 py-2`}
-                            >
-                                <Text style={tw`text-white`}>{day}</Text>
-                            </View>
-                        </>
-                    ))}
-                    {/* <Text style={tw`ml-12`}>
-                            {parseTime(new Date(schedule.start_time))} -{' '}
-                            {parseTime(new Date(schedule.end_time))}
-                        </Text> */}
-                </View>
+
+            <Text style={tw`mb-2`}>{schedule.shuttle}</Text>
+            <Text style={tw`mb-2`}>
+                Runs from {parseTime(new Date(schedule.start_time))} to{' '}
+                {parseTime(new Date(schedule.end_time))}
+            </Text>
+            <View style={tw`flex-row `}>
+                {/* <Text>{schedule.days.map((day) => day)}</Text> */}
+                {schedule.days.map((day) => (
+                    <>
+                        <View
+                            style={tw`flex-row justify-center items-center rounded-2xl bg-main shadow-sm mr-2 px-2 py-2`}
+                        >
+                            <Text style={tw`text-white`}>{day}</Text>
+                        </View>
+                    </>
+                ))}
+            </View>
+            <ScrollView>
                 {schedule.schedule.map((s) => (
                     <View style={tw`flex-row justify-between p-2 mt-2`}>
                         <Text>{s.stop_abbr}</Text>
@@ -58,10 +59,10 @@ const ScheduleListRow = (props: IScheduleListRowProps) => {
                         </Text>
                     </View>
                 ))}
-            </ListItem.Content>
+            </ScrollView>
             {/* <ListItem.Chevron /> */}
             {/* </ListItem.Swipeable> */}
-        </ScrollView>
+        </View>
     );
 };
 

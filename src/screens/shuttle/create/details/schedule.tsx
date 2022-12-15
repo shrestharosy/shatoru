@@ -71,6 +71,7 @@ const ScheduleDetails = () => {
                     <CustomMultiSelect
                         name="stopIds"
                         options={stopsList}
+                        showSelectedInsideField={false}
                         selectedOptions={selectedOptions}
                         onChange={(item) => {
                             setSelectedOptions(item);

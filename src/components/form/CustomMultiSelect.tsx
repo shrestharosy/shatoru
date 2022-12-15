@@ -18,6 +18,7 @@ interface ICustomMultiSelectProps extends UseControllerProps {
     showSelectedOptionsAsTags?: boolean;
     isSearchAllowed?: boolean;
     dropDownStyle?: DropDownStyleEnum;
+    showSelectedInsideField?: boolean;
 }
 
 export enum DropDownStyleEnum {
@@ -33,6 +34,7 @@ const CustomMultiSelect = (props: ICustomMultiSelectProps) => {
         showSelectedOptionsAsTags = false,
         isSearchAllowed = true,
         dropDownStyle = DropDownStyleEnum.dropdown,
+        showSelectedInsideField = true,
         onChange,
     } = props;
 
@@ -59,7 +61,7 @@ const CustomMultiSelect = (props: ICustomMultiSelectProps) => {
             placeholder={`${selectedOptions.length} options selected`}
             value={selectedOptions}
             search={isSearchAllowed}
-            inside={true}
+            inside={showSelectedInsideField}
             searchPlaceholder="Search..."
             onChange={onChange}
             // renderItem={renderDataItem}

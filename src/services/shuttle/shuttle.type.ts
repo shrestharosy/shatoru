@@ -19,7 +19,7 @@ export interface IShuttleSchedulePayload {
 }
 
 export interface IShuttleResponse {
-    id: number;
+    id: string;
     name: string;
     schedules: Array<string>;
 }

@@ -29,7 +29,7 @@ interface ICreateDriverFormValues {
     lastName: string;
     email: string;
     username: string;
-    schedule: string;
+    shuttles: Array<string>;
 }
 
 const CreateDriver = ({ navigation }: IDriver) => {
@@ -62,9 +62,9 @@ const CreateDriver = ({ navigation }: IDriver) => {
 
     const getAllSchedules = async () => {
         try {
-            const response = await shuttleService.fetchSchedules();
+            const response = await shuttleService.fetchShuttles();
             const shuttleOptions = response.map((shuttle) => ({
-                label: shuttle.shuttle,
+                label: shuttle.name,
                 value: shuttle.id,
             }));
             setShuttlesOption(shuttleOptions);
@@ -126,13 +126,13 @@ const CreateDriver = ({ navigation }: IDriver) => {
                         )}
                     />
                     <Controller
-                        name="schedule"
+                        name="shuttles"
                         control={methods.control}
                         render={({}) => (
                             <>
                                 <Label label={'Shuttle'} />
                                 <CustomMultiSelect
-                                    name="schedule"
+                                    name="shuttles"
                                     options={shuttlesOption}
                                     isSearchAllowed={false}
                                     showSelectedOptionsAsTags={true}
@@ -142,7 +142,7 @@ const CreateDriver = ({ navigation }: IDriver) => {
                                     }
                                     onChange={(item) => {
                                         setSelectedOptions(item);
-                                        methods.setValue('schedule', item);
+                                        methods.setValue('shuttles', item);
                                     }}
                                 />
                             </>
@@ -153,6 +153,7 @@ const CreateDriver = ({ navigation }: IDriver) => {
             <Pressable
                 style={tw`bg-main mt-4 p-2 rounded-md`}
                 onPress={methods.handleSubmit(onSubmit, onError)}
+                disabled={methods.formState.isSubmitting}
             >
                 <Text style={tw`text-center text-white text-lg tracking-wide`}>
                     Create

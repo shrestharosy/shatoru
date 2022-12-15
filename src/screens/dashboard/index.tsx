@@ -38,9 +38,9 @@ const Dashboard = ({ navigation }: IDashboard) => {
                         />
                     )}
                 </View>
-                {user && user.role === RoleEnum.ADMIN && (
-                    <>
-                        <View style={tw`flex flex-row justify-around mt-4`}>
+                <>
+                    <View style={tw`flex flex-row justify-around mt-4`}>
+                        {user && user.role === RoleEnum.ADMIN && (
                             <ComponentCard
                                 navigation={navigation}
                                 image={IMAGE.DRIVER}
@@ -48,10 +48,17 @@ const Dashboard = ({ navigation }: IDashboard) => {
                                 route="Driver"
                                 style="ml-4 bg-white"
                             />
-                            <ComponentCard style={''} />
-                        </View>
-                    </>
-                )}
+                        )}
+                        <ComponentCard style={''} />
+                        {/* <ComponentCard
+                            navigation={navigation}
+                            image={IMAGE.DRIVER}
+                            name="Drivers"
+                            route="Driver"
+                            style="ml-4 bg-white"
+                        /> */}
+                    </View>
+                </>
             </View>
         </ComponentWrapper>
     );
