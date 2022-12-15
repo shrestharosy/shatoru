@@ -43,13 +43,20 @@ const Dashboard = ({ navigation }: IDashboard) => {
                         {user && user.role === RoleEnum.ADMIN && (
                             <ComponentCard
                                 navigation={navigation}
-                                image={IMAGE.DRIVER}
+                                image={IMAGE.DRIVER_ALT}
                                 name="Drivers"
                                 route="Driver"
                                 style="ml-4 bg-white"
                             />
                         )}
-                        <ComponentCard style={''} />
+                        {/* <ComponentCard style={''} /> */}
+                        <ComponentCard
+                            navigation={navigation}
+                            image={IMAGE.USER}
+                            name="Account"
+                            route="Account"
+                            style="ml-4 bg-white"
+                        />
                         {/* <ComponentCard
                             navigation={navigation}
                             image={IMAGE.DRIVER}

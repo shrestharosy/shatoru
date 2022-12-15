@@ -11,6 +11,7 @@ type IRouteList = {
     ScheduleList: ScheduleListParams;
     StopList: undefined;
     CreateStop: undefined;
+    Account: undefined;
 };
 
 type ScheduleListParams = {
