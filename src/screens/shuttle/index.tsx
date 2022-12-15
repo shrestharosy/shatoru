@@ -1,6 +1,7 @@
 import { Card } from '@rneui/themed';
 import React, { useEffect, useState } from 'react';
 import { Pressable, SafeAreaView, Text, View } from 'react-native';
+import Loader from 'src/components/loader';
 import ShuttleRow from 'src/components/Shuttle/ShuttleRow';
 import withProtectedScreen from 'src/libs/hoc/auth_wrapper';
 import { IRouteProps } from 'src/libs/routes';
@@ -59,7 +60,7 @@ function Shuttle(props: IShuttleProps) {
                     </Pressable>
                 </Card.Title>
                 <Card.Divider />
-                {isLoading && <Text>Loading...</Text>}
+                {isLoading && <Loader />}
                 {!isLoading &&
                     shuttles.length > 0 &&
                     shuttles.map((shuttle) => (

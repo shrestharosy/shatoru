@@ -8,6 +8,13 @@ const fetchdrivers = async () => {
     return response.data;
 };
 
+const fetchDriver = async (driverId: number) => {
+    const response: AxiosResponse<IDriverResponse> = await axiosInstance.get(
+        `/user/driver/${driverId}/`
+    );
+    return response.data;
+};
+
 const createDriver = async (payload: ICreateDriverPayload) => {
     const { firstName, lastName, ...rest } = payload;
     const response = await axiosInstance.post(`/user/driver/`, {
@@ -25,6 +32,7 @@ const deleteDriver = async (id: number) => {
 
 export const driverService = {
     fetchdrivers,
+    fetchDriver,
     createDriver,
     deleteDriver,
 };

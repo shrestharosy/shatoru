@@ -45,7 +45,7 @@ const Dashboard = ({ navigation }: IDashboard) => {
                                 navigation={navigation}
                                 image={IMAGE.DRIVER_ALT}
                                 name="Drivers"
-                                route="Driver"
+                                route="Drivers"
                                 style="ml-4 bg-white"
                             />
                         )}

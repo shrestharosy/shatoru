@@ -33,6 +33,12 @@ const fetchShuttles = async () => {
     return response.data;
 };
 
+const fetchShuttle = async (shuttleId: string) => {
+    const response: AxiosResponse<Array<IShuttleResponse>> =
+        await axiosInstance.get(`/shuttles/${shuttleId}`);
+    return response.data;
+};
+
 const fetchSchedule = async (id) => {
     const response: AxiosResponse<IScheduleResponse> = await axiosInstance.get(
         `/shuttles/schedules/${id}/`
@@ -60,6 +66,7 @@ export const shuttleService = {
     fetchStops,
     createShuttle,
     fetchShuttles,
+    fetchShuttle,
     deleteShuttle,
     createStop,
     deleteStop,

@@ -1,6 +1,7 @@
 import { Card } from '@rneui/themed';
 import React, { useContext, useEffect, useState } from 'react';
 import { Pressable, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import Loader from 'src/components/loader';
 import StopRow from 'src/components/Shuttle/StopRow';
 import { AuthContext } from 'src/context/auth_context';
 import withProtectedScreen from 'src/libs/hoc/auth_wrapper';
@@ -63,7 +64,7 @@ const StopList = ({ navigation }: IStopProps) => {
                         <Card.Divider />
                     </>
                 )}
-                {isLoading && <Text>Loading...</Text>}
+                {isLoading && <Loader />}
                 {!isLoading &&
                     stopsList.length > 0 &&
                     stopsList.map((stop) => (

@@ -11,4 +11,5 @@ export interface IDriverResponse {
     first_name: string;
     last_name: string;
     username: string;
+    shuttles: Array<string>;
 }

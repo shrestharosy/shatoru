@@ -1,6 +1,7 @@
 import { Card, Text } from '@rneui/themed';
 import React, { useEffect, useState } from 'react';
 import { Pressable, SafeAreaView, View } from 'react-native';
+import Loader from 'src/components/loader';
 import ScheduleListRow from 'src/components/Shuttle/ScheduleListRow';
 import { IRouteProps } from 'src/libs/routes';
 import { shuttleService } from 'src/services/shuttle';
@@ -78,7 +79,7 @@ const ScheduleList = (props: IScheduleListProps) => {
                         </Pressable>
                     </Card.Title>
                     <Card.Divider /> */}
-                    {isLoading && <Text>Loading...</Text>}
+                    {isLoading && <Loader />}
                     {!isLoading &&
                         schedules.length > 0 &&
                         schedules.map((schedule, index) => (

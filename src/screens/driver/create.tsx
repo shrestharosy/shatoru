@@ -46,7 +46,7 @@ const CreateDriver = ({ navigation }: IDriver) => {
         try {
             await driverService.createDriver(data);
             alert('Driver created successfully');
-            navigation.navigate('Driver');
+            navigation.navigate('Drivers');
         } catch (error: any) {
             alert(error.message ?? 'Please try again');
         }

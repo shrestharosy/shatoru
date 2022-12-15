@@ -10,7 +10,7 @@ import ScheduleList from 'src/screens/shuttle/ScheduleList';
 import { AuthContext } from 'src/context/auth_context';
 import IRouteList from 'src/libs/routes';
 import Dashboard from './dashboard';
-import DriverScreen from './driver';
+import DriversScreen from './driver/drivers';
 import CreateDriverScreen from './driver/create';
 import ForgotPassword from './forgotPassword';
 import LoginScreen from './login';
@@ -19,6 +19,7 @@ import CreateShuttleScreen from './shuttle/create';
 import StopListScreen from './stop';
 import CreateStopScreen from './stop/create';
 import Account from './account';
+import Driver from './driver/driver';
 
 const Stack = createNativeStackNavigator<IRouteList>();
 
@@ -44,9 +45,14 @@ export default function Main() {
                         options={headerDetail}
                     />
                     <Stack.Screen
-                        name={'Driver'}
-                        component={DriverScreen}
+                        name={'Drivers'}
+                        component={DriversScreen}
                         options={{ title: 'Drivers' }}
+                    />
+                    <Stack.Screen
+                        name={'Driver'}
+                        component={Driver}
+                        options={{ title: 'Driver' }}
                     />
                     <Stack.Screen
                         name={'CreateDriver'}

@@ -2,15 +2,17 @@ import { Card } from '@rneui/themed';
 import React, { useEffect, useState } from 'react';
 import { Pressable, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import DriverRow from 'src/components/Driver/DriverRow';
+import Loader from 'src/components/loader';
 import withProtectedScreen from 'src/libs/hoc/auth_wrapper';
 import { IRouteProps } from 'src/libs/routes';
 import { driverService } from 'src/services/driver';
 import { IDriverResponse } from 'src/services/driver/driver.type';
+import { shuttleService } from 'src/services/shuttle';
 import tw from 'src/styles/tailwind';
 
-interface IDriver extends IRouteProps {}
+interface IDrivers extends IRouteProps {}
 
-const Driver = ({ navigation }: IDriver) => {
+const Drivers = ({ navigation }: IDrivers) => {
     const [isLoading, setIsLoading] = useState(false);
     const [drivers, setDrivers] = useState<Array<IDriverResponse>>([]);
 
@@ -55,7 +57,7 @@ const Driver = ({ navigation }: IDriver) => {
                     </Pressable>
                 </Card.Title>
                 <Card.Divider />
-                {isLoading && <Text>Loading...</Text>}
+                {isLoading && <Loader />}
                 {!isLoading &&
                     drivers.length > 0 &&
                     drivers.map((driver) => (
@@ -63,6 +65,11 @@ const Driver = ({ navigation }: IDriver) => {
                             key={driver.id}
                             driver={driver}
                             onDelete={onDelete}
+                            onClick={() =>
+                                navigation.navigate('Driver', {
+                                    driverId: driver.id,
+                                })
+                            }
                         />
                     ))}
                 {!isLoading && drivers.length === 0 && (
@@ -75,6 +82,6 @@ const Driver = ({ navigation }: IDriver) => {
     );
 };
 
-export default withProtectedScreen(Driver);
+export default withProtectedScreen(Drivers);
 
 const styles = StyleSheet.create({});

@@ -3,7 +3,8 @@ import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 type IRouteList = {
     Login: undefined;
     Dashboard: undefined;
-    Driver: undefined;
+    Drivers: undefined;
+    Driver: DriverParams;
     CreateDriver: undefined;
     ForgotPassword: undefined;
     Shuttle: undefined;
@@ -16,6 +17,10 @@ type IRouteList = {
 
 type ScheduleListParams = {
     shuttleId: number;
+};
+
+type DriverParams = {
+    driverId: number;
 };
 
 export interface IRouteProps extends NativeStackScreenProps<IRouteList, any> {}
