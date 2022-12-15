@@ -37,19 +37,7 @@ const Dashboard = ({ navigation }: IDashboard) => {
                             style="bg-white"
                         />
                     )}
-                </View>
-                <>
-                    <View style={tw`flex flex-row justify-around mt-4`}>
-                        {user && user.role === RoleEnum.ADMIN && (
-                            <ComponentCard
-                                navigation={navigation}
-                                image={IMAGE.DRIVER_ALT}
-                                name="Drivers"
-                                route="Drivers"
-                                style="ml-4 bg-white"
-                            />
-                        )}
-                        {/* <ComponentCard style={''} /> */}
+                    {user && user.role === RoleEnum.DRIVER && (
                         <ComponentCard
                             navigation={navigation}
                             image={IMAGE.USER}
@@ -57,13 +45,28 @@ const Dashboard = ({ navigation }: IDashboard) => {
                             route="Account"
                             style="ml-4 bg-white"
                         />
-                        {/* <ComponentCard
-                            navigation={navigation}
-                            image={IMAGE.DRIVER}
-                            name="Drivers"
-                            route="Driver"
-                            style="ml-4 bg-white"
-                        /> */}
+                    )}
+                </View>
+                <>
+                    <View style={tw`flex flex-row justify-around mt-4`}>
+                        {user && user.role === RoleEnum.ADMIN && (
+                            <>
+                                <ComponentCard
+                                    navigation={navigation}
+                                    image={IMAGE.DRIVER_ALT}
+                                    name="Drivers"
+                                    route="Drivers"
+                                    style="ml-4 bg-white"
+                                />
+                                <ComponentCard
+                                    navigation={navigation}
+                                    image={IMAGE.USER}
+                                    name="Account"
+                                    route="Account"
+                                    style="ml-4 bg-white"
+                                />
+                            </>
+                        )}
                     </View>
                 </>
             </View>
